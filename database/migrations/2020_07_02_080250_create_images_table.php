@@ -19,6 +19,7 @@ class CreateImagesTable extends Migration
             $table->string('type');
             $table->integer('td_id'); //trip or destination id
             $table->text('description');
+            $table->string('size');
             $table->timestamps();
         });
     }
