@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTripsTable extends Migration
+class CreateSocialAccountsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,18 +13,15 @@ class CreateTripsTable extends Migration
      */
     public function up()
     {
-        Schema::create('trips', function (Blueprint $table) {
+        Schema::create('social_accounts', function (Blueprint $table) {
             $table->id();
-            $table->string('slug');
-            $table->string('name');
-            $table->text('description');
-            $table->date('start_date');
-            $table->date('end_date');
             $table->bigInteger('user_id')->unsigned();
-            $table->boolean('private');
-            $table->string('image_url');
+            $table->string('provider_user_id');
+            $table->string('provider');
             $table->timestamps();
+        });
 
+        Schema::table('social_accounts', function (Blueprint $table) {
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
@@ -36,6 +33,6 @@ class CreateTripsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('trips');
+        Schema::dropIfExists('social_accounts');
     }
 }

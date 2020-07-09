@@ -3,11 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\SignupRequest;
+use App\Models\Social_Account;
 use App\User;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Laravel\Socialite\Facades\Socialite;
+use Illuminate\Support\Str;
 
 class AuthController extends Controller
 {
@@ -43,6 +46,66 @@ class AuthController extends Controller
 
     public function refresh() {
         return $this->respondWithToken(auth()->refresh());
+    }
+
+    public function redirectToProvider($provider) {
+        return Socialite::driver($provider)->stateless()->redirect();
+    }
+
+    public function handleProviderCallback($provider) {
+        $user = Socialite::driver($provider)->stateless()->user();
+
+
+        if(!$user->token) {
+            dd('failed');
+        }
+
+        $appUser = User::whereEmail($user->email)->first();
+
+        if(!$appUser) {
+            // create user and add the provider
+            $appUser = User::create([
+                'name' => $user->name,
+                'email' => $user->email,
+                'password' => Str::random(7)
+            ]);
+
+            $social_account = $appUser->social_accounts()->where('provider', $provider)->first();
+
+            
+            if(!$social_account) {
+                // create provider
+                $social_account = Social_Account::create([
+                    'provider' => $provider,
+                    'provider_user_id' => $user->id,
+                    'user_id' => $appUser->id
+                ]);
+            }
+
+        } else {
+            // user already exists
+            $social_account = $appUser->social_accounts()->where('provider', $provider)->first();
+
+            
+            if(!$social_account) {
+                // create provider
+                $social_account = Social_Account::create([
+                    'provider' => $provider,
+                    'provider_user_id' => $user->id,
+                    'user_id' => $appUser->id
+                ]);
+            }
+        }
+
+        // login user
+        $access_token = $appUser->createToken('Auth Token')->accessToken;
+
+        return response()->json([
+            'access_token' => $access_token
+        ]);
+
+        dd($appUser, $user, $access_token);
+        
     }
 
     protected function respondWithToken($token) {

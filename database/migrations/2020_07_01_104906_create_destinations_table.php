@@ -20,8 +20,10 @@ class CreateDestinationsTable extends Migration
             $table->text('description');
             $table->date('start_date');
             $table->date('end_date');
-            $table->integer('trip_id')->unsigned();
+            $table->bigInteger('trip_id')->unsigned();
             $table->timestamps();
+
+            $table->foreign('trip_id')->references('id')->on('trips')->onDelete('cascade');
         });
     }
 
