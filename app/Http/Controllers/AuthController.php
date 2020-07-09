@@ -49,7 +49,11 @@ class AuthController extends Controller
     }
 
     public function redirectToProvider($provider) {
-        return Socialite::driver($provider)->stateless()->redirect();
+        $url = Socialite::driver($provider)->stateless()->redirect()->getTargetUrl();
+
+        return response()->json([
+            'url' => $url
+        ]);
     }
 
     public function handleProviderCallback($provider) {
@@ -70,31 +74,11 @@ class AuthController extends Controller
                 'password' => Str::random(7)
             ]);
 
-            $social_account = $appUser->social_accounts()->where('provider', $provider)->first();
-
-            
-            if(!$social_account) {
-                // create provider
-                $social_account = Social_Account::create([
-                    'provider' => $provider,
-                    'provider_user_id' => $user->id,
-                    'user_id' => $appUser->id
-                ]);
-            }
+            $this->createSocialAccount($appUser, $user->id, $provider);
 
         } else {
             // user already exists
-            $social_account = $appUser->social_accounts()->where('provider', $provider)->first();
-
-            
-            if(!$social_account) {
-                // create provider
-                $social_account = Social_Account::create([
-                    'provider' => $provider,
-                    'provider_user_id' => $user->id,
-                    'user_id' => $appUser->id
-                ]);
-            }
+            $this->createSocialAccount($appUser, $user->id, $provider);
         }
 
         // login user
@@ -104,8 +88,21 @@ class AuthController extends Controller
             'access_token' => $access_token
         ]);
 
-        dd($appUser, $user, $access_token);
         
+    }
+
+    private function createSocialAccount($user, $provider_id, $provider) {
+        $social_account = $user->social_accounts()->where('provider', $provider)->first();
+
+            
+        if(!$social_account) {
+            // create provider
+            $social_account = Social_Account::create([
+                'provider' => $provider,
+                'provider_user_id' => $provider_id,
+                'user_id' => $user->id
+            ]);
+        }
     }
 
     protected function respondWithToken($token) {

@@ -32,12 +32,12 @@ return [
     'google' => [
         'client_id' => env('GOOGLE_CLIENT_ID'),
         'client_secret' => env('GOOGLE_CLIENT_SECRET'),
-        'redirect' => 'http://localhost:8001/api/auth/social/google/callback'
+        'redirect' => env('FRONT_APP') . '/auth/google/callback'
     ],
     'facebook' => [
         'client_id' => env('FB_CLIENT_ID'),
         'client_secret' => env('FB_CLIENT_SECRET'),
-        'redirect' => 'http://localhost:8001/api/auth/social/facebook/callback'
+        'redirect' => env('FRONT_APP') . '/auth/facebook/callback'
     ],
 
 ];
