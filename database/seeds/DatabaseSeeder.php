@@ -16,11 +16,8 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         factory(User::class, 50)->create();
-        factory(Trip::class, 50)->create()->each(function($trip) {
-            return $trip->images()->saveMany(factory(Image::class, 1)->make(['type' => 'trip', 'td_id' => $trip->id]));
-        });
-        factory(Destination::class, 50)->create()->each(function($destination) {
-            return $destination->images()->saveMany(factory(Image::class, 2)->make(['type' => 'destination', 'td_id' => $destination->id]));
-        });
+        factory(Trip::class, 50)->create();
+        factory(Destination::class, 50)->create();
+        factory(Image::class, 50)->create();
     }
 }

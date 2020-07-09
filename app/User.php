@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Models\Social_Account;
 use App\Models\Trip;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -45,5 +46,9 @@ class User extends Authenticatable
 
     public function trips() {
         return $this->hasMany(Trip::class);
+    }
+
+    public function social_accounts() {
+        return $this->hasMany(Social_Account::class);
     }
 }

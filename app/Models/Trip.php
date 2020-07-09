@@ -17,6 +17,6 @@ class Trip extends Model
     }
 
     public function images() {
-        return $this->hasMany(Image::class, 'td_id')->where('images.type', '=', 'trip');
+        return $this->morphMany(Image::class, 'imageable');
     }
 }
