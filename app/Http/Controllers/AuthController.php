@@ -19,11 +19,16 @@ class AuthController extends Controller
 
         if(!$user || !Hash::check($request->password, $user->password)) {
             throw ValidationException::withMessages([
-                'email' => ['The provided credentials are incorrect']
+                'success' => false,
+                'message' => ['The provided credentials are incorrect']
             ]);
         }
 
-        return $user->createToken('Auth Token')->accessToken;
+        return response()->json([
+            'success' => true,
+            'user' => $user,
+            'access_token' => $user->createToken('Auth Token')->accessToken
+        ]);
     }
 
     public function signup(SignupRequest $request) {
@@ -61,7 +66,10 @@ class AuthController extends Controller
 
 
         if(!$user->token) {
-            dd('failed');
+            return response()->json([
+                'success' => false,
+                'message' => 'Failed to login'
+            ], 401);
         }
 
         $appUser = User::whereEmail($user->email)->first();

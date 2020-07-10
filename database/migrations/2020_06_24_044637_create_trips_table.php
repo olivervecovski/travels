@@ -15,15 +15,19 @@ class CreateTripsTable extends Migration
     {
         Schema::create('trips', function (Blueprint $table) {
             $table->id();
-            $table->string('slug');
             $table->string('name');
-            $table->text('description');
+            $table->text('description')->default('');
             $table->date('start_date');
-            $table->date('end_date');
+            $table->date('end_date')->nullable();
             $table->bigInteger('user_id')->unsigned();
             $table->boolean('private');
-            $table->string('image_url');
+            $table->string('image_url')->default('');
             $table->timestamps();
+
+            //people
+            //stories
+            //destinations
+            //activities
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
