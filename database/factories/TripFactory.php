@@ -11,7 +11,6 @@ $factory->define(Trip::class, function (Faker $faker) {
     $start = $faker->dateTimeBetween('next Monday', 'next Monday +7 days');
     return [
         'name' => $title,
-        'slug' => Str::slug($title),
         'description' => $faker->text,
         'start_date' => $start,
         'end_date' => $faker->dateTimeBetween($start, $start->format('Y-m-d H:i:s').'+2 days'),
