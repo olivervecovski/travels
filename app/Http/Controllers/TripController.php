@@ -50,7 +50,9 @@ class TripController extends Controller
      */
     public function show(Trip $trip)
     {
-        //
+        return response()->json([
+            'trip' => new TripResource($trip)
+        ]);
     }
 
     /**
@@ -74,6 +76,14 @@ class TripController extends Controller
     public function destroy(Trip $trip)
     {
         //
+    }
+
+    public function trips() {
+        $trips = auth()->user()->trips;
+        return response()->json([
+            'count' => count($trips),
+            'trips' => TripResource::collection($trips)
+        ]);
     }
 
     private function tripResponse(Trip $trip) {
