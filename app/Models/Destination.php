@@ -8,6 +8,8 @@ class Destination extends Model
 {
     protected $guarded = [];
 
+    protected $morphClass = 'App\Models\Destination';
+
     public function trip() {
         return $this->belongsTo(Trip::class);
     }

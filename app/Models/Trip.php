@@ -15,7 +15,8 @@ class Trip extends Model
           $trip->user_id = Auth::id();
         });
     }
-    protected $guarded = [];
+
+    protected $morphClass = 'App\Models\Trip';
 
     protected $fillable = ['start_date', 'private', 'name', 'description', 'end_date', 'image_url'];
 
@@ -29,5 +30,9 @@ class Trip extends Model
 
     public function images() {
         return $this->morphMany(Image::class, 'imageable');
+    }
+
+    public function activities() {
+        return $this->morphMany(Activity::class, 'activitable');
     }
 }
