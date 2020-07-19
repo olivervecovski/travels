@@ -16,12 +16,12 @@ class CreateTripsTable extends Migration
         Schema::create('trips', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->text('description')->default('');
+            $table->text('description');
             $table->date('start_date');
             $table->date('end_date')->nullable();
             $table->bigInteger('user_id')->unsigned();
             $table->boolean('private');
-            $table->string('image_url')->default('');
+            $table->string('image_url');
             $table->timestamps();
 
             //people
