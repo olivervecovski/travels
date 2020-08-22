@@ -29,7 +29,8 @@ class TripController extends Controller
      */
     public function index()
     {
-        $trips = Trip::latest()->get();
+        // Get public trips(only) orderded by start date
+        $trips = Trip::latest()->where('private', false)->orderBy('start_date', 'desc')->get();
         return response(TripResource::collection($trips), 200);
     }
 
@@ -53,7 +54,19 @@ class TripController extends Controller
      */
     public function show(Trip $trip)
     {
+        $user = Auth::guard('api')->user();
+
+        if($trip->private) {
+            if(!$user || $user->id != $trip->user_id){
+                return response()->json([
+                    'success' => false,
+                    'message' => "Only the owner of this trip have permission to view it"
+                ], 403);
+            }
+        }
+
         return response()->json([
+            'success' => true,
             'trip' => new TripResource($trip)
         ], 200);
     }
