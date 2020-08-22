@@ -26,14 +26,6 @@ class TripsTest extends TestCase
             ]);
     }
 
-    public function test_can_show_trip() {
-        $this->get('/api/trips/2')
-        ->assertStatus(200)
-        ->assertJsonStructure([
-            '*' => [ 'title', 'id', 'description', 'start_date' ],
-        ]);
-    }
-
     public function test_can_create_trip_with_minimum_requirements() {
         $data = [
             'name' => $this->faker->sentence,
@@ -149,5 +141,53 @@ class TripsTest extends TestCase
         ->assertStatus(403);
 
         $this->assertDatabaseHas('trips', ['id' => $trip->id]);
+    }
+
+    public function test_public_trips_are_viewable() {
+        $user = factory(User::class)->create();
+        $trip = factory(Trip::class)->create(['user_id' => $user->id, 'private' => false]);
+
+        Passport::actingAs(
+            factory(User::class)->create()
+        );
+
+        $this->get('/api/trips/' .$trip->id)
+        ->assertStatus(200)
+        ->assertJsonStructure([
+            'success',
+            'trip'
+        ]);
+    }
+
+    public function test_owner_of_private_trip_can_view() {
+        $user = factory(User::class)->create();
+        $trip = factory(Trip::class)->create(['user_id' => $user->id, 'private' => true]);
+
+        Passport::actingAs(
+            $user
+        );
+
+        $this->get('/api/trips/' .$trip->id)
+        ->assertStatus(200)
+        ->assertJsonStructure([
+            'success',
+            'trip'
+        ]);
+    }
+
+    public function test_nonOwner_cannot_view_private_trip() {
+        $user = factory(User::class)->create();
+        $trip = factory(Trip::class)->create(['user_id' => $user->id, 'private' => true]);
+
+        Passport::actingAs(
+            factory(User::class)->create()
+        );
+
+        $this->get('/api/trips/' .$trip->id)
+        ->assertStatus(403)
+        ->assertJsonStructure([
+            'success',
+            'message'
+        ]);
     }
 }
