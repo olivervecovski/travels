@@ -1,0 +1,59 @@
+<template>
+  <div class="container">
+    <div class="m-auto col-sm-12 col-lg-6">
+      <div class="card">
+        <div class="card-header bg-dark"><div class="text-center"><img src="../../../images/travelslogo.png" alt="" class="form-logo"></div></div>
+        <div class="card-body">
+          <form @submit.prevent>
+            
+            <div class="form-group">
+              <input type="email" class="form-control" placeholder="Email" v-model="form.email">
+            </div>
+            <div class="form-group">
+              <input type="password" class="form-control" placeholder="Password" v-model="form.password">
+            </div>
+            <button type="button" class="btn btn-block btn-form" @click="login('')">Login</button>
+          </form>
+        </div>
+      </div>
+    </div>
+    
+  </div>
+</template>
+
+<script>
+import User from '../../Helpers/User';
+export default {
+  data() {
+    return {
+      form: {
+        email: null,
+        password: null
+      }
+    }
+  },
+  methods: {
+    login(provider) {
+      if(provider.length > 0) {
+        // social login
+        User.socialLogin(provider)
+        .then(response => {
+          if(response.data.url) {
+            window.location.href = response.data.url;
+          }
+        })
+      } else {
+        User.login(this.form)
+        .then(response => {
+          localStorage.setItem('token', response.data.access_token);
+        })
+
+      }
+    }
+  },
+}
+</script>
+
+<style>
+
+</style>

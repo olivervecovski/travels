@@ -6,3 +6,33 @@
 
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
+
+//NAVBAR
+.navbar-logo {
+  width: 9em;
+}
+
+
+//FORM
+.form-logo {
+  width: 50%;
+  margin-bottom: .5rem;
+}
+
+.form-control {
+  height: 3.5rem;
+}
+
+.btn {
+  height: 2rem;
+}
+
+.btn {
+  font-size: 20px;
+  height: 3.5rem; 
+}
+
+.btn-form {
+  background-color: #343a40;
+  color: #fff;
+}

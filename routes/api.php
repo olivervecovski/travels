@@ -29,6 +29,7 @@ Route::group([
     Route::post('login', 'AuthController@login');
     Route::post('signup', 'AuthController@signup');
     Route::post('logout', 'AuthController@logout');
+    Route::post('refresh', 'AuthController@refresh');
     Route::get('social/{provider}', 'AuthController@redirectToProvider');
     Route::get('social/{provider}/callback', 'AuthController@handleProviderCallback');
 });
