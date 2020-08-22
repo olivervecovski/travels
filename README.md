@@ -1,5 +1,5 @@
-## Prerequisite
-# 1. Install Xamp
+## Prerequisites
+# 1. Install Laragon
 
 # 2. Install Composer
 
@@ -16,7 +16,11 @@
 
 # 4. run "php artisan key:generate"
 
-# 5. run "php artisan serve"
-
 ## Verify installation
-# In postman: get "http://127.0.0.1:8000/api/trips"
+# In postman: get "http://traveldestinations.test/api/trips"
+
+## In browser:
+# http://traveldestinations.test
+
+## NOTE
+# Login/Register via Facebook and Google will not work without Client ID & Client Secret

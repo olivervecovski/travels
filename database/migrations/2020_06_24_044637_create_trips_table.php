@@ -20,7 +20,7 @@ class CreateTripsTable extends Migration
             $table->date('start_date');
             $table->date('end_date')->nullable();
             $table->bigInteger('user_id')->unsigned();
-            $table->boolean('private');
+            $table->boolean('private')->default(0)->change();
             $table->string('image_url');
             $table->timestamps();
 

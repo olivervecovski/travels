@@ -25,7 +25,6 @@ class TripRequest extends FormRequest
     {
         return [
             'name' => 'required',
-            'private' => 'required',
             'start_date' => 'required'
         ];
     }
