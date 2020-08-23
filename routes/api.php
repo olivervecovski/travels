@@ -21,6 +21,7 @@ Route::middleware('auth:api')->get('/auth/user', function (Request $request) {
 Route::middleware('auth:api')->get('/user/trips', 'TripController@trips');
 
 Route::apiResource('/trips', 'TripController');
+Route::apiResource('/trips/{trip}/destinations', 'DestinationController');
 
 Route::group([
     'middleware' => 'api',

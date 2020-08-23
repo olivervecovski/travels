@@ -8,6 +8,8 @@ class Destination extends Model
 {
     protected $guarded = [];
 
+    protected $fillable = ['description', 'start_date', 'end_date', 'country'];
+
     protected $morphClass = 'App\Models\Destination';
 
     public function trip() {
