@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\DestinationRequest;
 use App\Models\Destination;
 use App\Models\Trip;
 use Illuminate\Http\Request;
@@ -24,9 +25,9 @@ class DestinationController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Trip $trip, Request $request)
+    public function store(Trip $trip, DestinationRequest $request)
     {
-        
+        $destination = $trip->destinations()->create($request->all());
     }
 
     /**
