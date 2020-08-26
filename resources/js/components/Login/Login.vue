@@ -4,16 +4,14 @@
       <div class="card">
         <div class="card-header bg-dark"><div class="text-center"><img src="../../../images/travelslogo.png" alt="" class="form-logo"></div></div>
         <div class="card-body">
-          <form @submit.prevent>
-            
-            <div class="form-group">
-              <input type="email" class="form-control" placeholder="Email" v-model="form.email">
-            </div>
-            <div class="form-group">
-              <input type="password" class="form-control" placeholder="Password" v-model="form.password">
-            </div>
-            <button type="button" class="btn btn-block btn-form" @click="login('')">Login</button>
-          </form>
+          <div class="form-group">
+            <input type="email" class="form-control" placeholder="Email" v-model="form.email">
+          </div>
+          <div class="form-group">
+            <input type="password" class="form-control" placeholder="Password" v-model="form.password">
+          </div>
+          <h6 class="text-center text-danger">{{ errorMessage }}</h6>
+          <button class="btn btn-block btn-form" @click="login('')">Login</button>
         </div>
       </div>
     </div>
@@ -29,7 +27,8 @@ export default {
       form: {
         email: null,
         password: null
-      }
+      },
+      errorMessage: null
     }
   },
   methods: {
@@ -43,11 +42,34 @@ export default {
           }
         })
       } else {
-        User.login(this.form)
+        this.$store.dispatch('login', this.form)
         .then(response => {
-          localStorage.setItem('token', response.data.access_token);
-        })
-
+          if(response.success) {
+            this.$toasted.success(response.message, {
+              icon: 'fa-check',
+              duration: 3000,
+              action : {
+                text : 'Close',
+                onClick : (e, toastObject) => {
+                    toastObject.goAway(0);
+                }
+              },
+            })
+          } else {
+            this.errorMessage = response.message;
+            this.$toasted.error(response.message, {
+              icon: 'fa-times',
+              duration: 5000,
+              action : {
+                text : 'Close',
+                onClick : (e, toastObject) => {
+                    toastObject.goAway(0);
+                }
+              },
+            })
+          }
+          
+        });
       }
     }
   },

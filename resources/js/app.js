@@ -7,9 +7,20 @@ import axios from 'axios';
 import store from "./store";
 import VueRouter from 'vue-router'
 import User from './Helpers/User'
+import Toasted from 'vue-toasted'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
+
+
 require('./bootstrap');
 
 window.Vue = require('vue');
+
+Vue.component('fa', FontAwesomeIcon);
+
+Vue.use(Toasted, {
+    iconPack: 'fontawesome'
+});
+
 
 /**
  * The following block of code may be used to automatically register your

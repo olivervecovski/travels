@@ -21,7 +21,7 @@ class AuthController extends Controller
             return response()->json([
                 'success' => false,
                 'message' => 'The provided credentials are incorrect'
-            ], 404);
+            ], 403);
         }
 
         return response()->json([

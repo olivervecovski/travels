@@ -13,11 +13,12 @@ export default {
   components: {
     navbar,
   },
-  data () {
-    return {
-      message: 'This is the home component!'
+  beforeCreate () {
+    let token = localStorage.getItem('token');
+    if(token) {
+      this.$store.dispatch('authUser');
     };
-  }
+  },
 }
 </script>
 

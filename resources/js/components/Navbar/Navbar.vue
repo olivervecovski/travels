@@ -14,7 +14,7 @@
             <router-link to="/login" class="nav-link">Login</router-link>
           </li>
           <li :class="{'nav-item': true, 'active' : ($route.name == 'Register')}" v-if="!$store.getters.isLoggedIn">
-            <router-link to="/register" class="nav-link">Register</router-link>
+            <router-link to="/register" class="nav-link">Sign up</router-link>
           </li>
           
           <li class="nav-item dropdown" v-if="$store.getters.isLoggedIn">
@@ -25,7 +25,7 @@
               <a class="dropdown-item" href="#">Action</a>
               <a class="dropdown-item" href="#">Another action</a>
               <div class="dropdown-divider"></div>
-              <a class="dropdown-item" @click="logout()" >Log out</a>
+              <a class="dropdown-item" href="#" @click="logout()" >Log out</a>
             </div>
           </li>
         </ul>
@@ -39,10 +39,18 @@ import User from "../../Helpers/User"
 export default {
   methods: {
     logout() {
-      User.logout()
-      .then(() => {
-        this.$store.dispatch('authUser');
-        localStorage.removeItem("token");
+      this.$store.dispatch('logout')
+      .then(response => {
+        this.$toasted.success(response.message, {
+            icon: 'fa-check',
+            duration: 3000,
+            action : {
+              text : 'Close',
+              onClick : (e, toastObject) => {
+                  toastObject.goAway(0);
+              }
+            },
+          })
       })
     }
   },
