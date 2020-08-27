@@ -70,6 +70,7 @@ export default {
                 }
               },
             })
+            this.$router.push('/');
           } else {
             this.errorMessage = response.message;
             this.errors = response.errors;

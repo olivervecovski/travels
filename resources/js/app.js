@@ -43,37 +43,27 @@ Vue.component('main-app', require('./components/Main.vue').default);
 import { routes } from './routes.js';
 import Axios from 'axios';
 
+// const init = async () => {
+
+//     let token = localStorage.getItem('token');
+//     if(token) {
+//         await store.dispatch('authUser')
+//     };
+    
+    
+// }
+
+// init()
 Vue.use(VueRouter);
-const router = new VueRouter({
-    mode: 'history',
-    routes
-});
-
-let isRefreshing = false;
-
-// axios.interceptors.response.use(
-//     response => {
-//         return response;
-//     },
-//     err => {
-//         const {
-//             config,
-//             response: { status, data }
-//         } = err;
-//         if(status === 401 && data.message === "Unauthenticated") {
-//             if(!isRefreshing) {
-//                 isRefreshing = true;
-//                 User.refresh()
-//                 .then(response => {
-//                     console.log(response);
-//                 })
-//             }
-//         }
-//     }
-// )
-
-const app = new Vue({
-    el: '#app',
-    router,
-    store
-});
+    const router = new VueRouter({
+        mode: 'history',
+        routes
+    });
+    
+    let isRefreshing = false;
+    
+    const app = new Vue({
+        el: '#app',
+        router,
+        store
+    });

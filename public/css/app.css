@@ -10955,3 +10955,20 @@ a.text-dark:focus {
   color: #fff;
 }
 
+.loading-page {
+  width: 100% !important;
+  height: 100vh;
+  background-color: #60b0f196;
+}
+
+.v-spinner {
+  top: 50% !important;
+  left: 50%;
+  position: absolute;
+}
+
+.v-ring {
+  top: -50px !important;
+  left: -50px !important;
+}
+

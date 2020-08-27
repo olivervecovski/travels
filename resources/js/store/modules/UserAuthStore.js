@@ -1,9 +1,10 @@
 import User from "../../Helpers/User";
+import { routes } from '../../routes.js';
 
-const enstorefil = {
+const userstore = {
   state: {
     status: '',
-    user: {}
+    user: {},
   },
   mutations: {
     auth_success(state, user) {
@@ -22,7 +23,7 @@ const enstorefil = {
     async authUser({commit}){
       const userData = await User.auth()
       if(userData){
-        commit('auth_success', userData.data)
+        commit('auth_success', userData)
       } else {
         commit('logout');
       }
@@ -61,11 +62,11 @@ const enstorefil = {
       })
     },
     logout({commit}) {
-      User.logout()
+      return User.logout()
       .then(response => {
         commit('logout');
         localStorage.removeItem('token');
-        return {'status': true, 'message': 'You are now logged out!'};
+        return {'success': true, 'message': 'You are now logged out!'};
       })
     }
   },
@@ -75,4 +76,4 @@ const enstorefil = {
   }
 };
 
-export default enstorefil
+export default userstore

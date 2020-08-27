@@ -55,6 +55,7 @@ export default {
                 }
               },
             })
+            this.$router.push('/');
           } else {
             this.errorMessage = response.message;
             this.$toasted.error(response.message, {

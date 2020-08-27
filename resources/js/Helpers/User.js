@@ -16,10 +16,9 @@ export default {
   },
 
   async auth() {
-    let user;
-    try{ user = await Api().get('/auth/user') }
-    catch{ user = null }
-    return user
+    return await Api().get('/auth/user')
+      .then(response => response.data)
+      .catch(() => null)
   },
 
   refresh() {
