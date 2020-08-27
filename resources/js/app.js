@@ -8,6 +8,9 @@ import store from "./store";
 import VueRouter from 'vue-router'
 import User from './Helpers/User'
 import Toasted from 'vue-toasted'
+
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { fab } from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
 
@@ -15,6 +18,7 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 
+library.add(fab);
 Vue.component('fa', FontAwesomeIcon);
 
 Vue.use(Toasted, {

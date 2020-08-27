@@ -11,7 +11,9 @@
             <input type="password" class="form-control" placeholder="Password" v-model="form.password">
           </div>
           <h6 class="text-center text-danger">{{ errorMessage }}</h6>
-          <button class="btn btn-block btn-form" @click="login('')">Login</button>
+          <button class="btn btn-block btn-form mb-4" @click="login('')">Sign in</button>
+          <h5 class="line-word mb-4"><span>OR</span></h5>
+          <button class="btn btn-block mb-4 btn-google" @click="login('google')"><fa class="mr-4" :icon="['fab', 'google']"></fa>Sign in with Google</button>
         </div>
       </div>
     </div>

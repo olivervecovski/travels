@@ -10991,6 +10991,20 @@ body {
   color: #fff;
 }
 
+.btn-google {
+  border: 1px solid #343a40;
+  color: #343a40;
+}
+
+.btn-google:hover {
+  background-color: #343a40;
+  color: #fff;
+}
+
+.btn-google:hover .fa-google {
+  color: #fff;
+}
+
 .loading-page {
   width: 100% !important;
   height: 100vh;
@@ -11057,5 +11071,18 @@ body {
 .list-trip-img {
   width: 100%;
   height: 250px;
+}
+
+.line-word {
+  width: 100%;
+  text-align: center;
+  border-bottom: 1px solid #000;
+  line-height: 0.1em;
+  margin: 10px 0 20px;
+}
+
+.line-word span {
+  background: #fff;
+  padding: 0 10px;
 }
 

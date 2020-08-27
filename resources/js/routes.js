@@ -15,6 +15,6 @@ function redirectIfLoggedIn(to, from, next) {
 
 export const routes = [
     { path: '/', component: Home, name: 'Home'},
-    { path: '/login', component: Login, name: 'Login', beforeEnter: redirectIfLoggedIn },
-    { path: '/register', component: Register, name: 'Register', beforeEnter: redirectIfLoggedIn },
+    { path: '/signin', component: Login, name: 'Login', beforeEnter: redirectIfLoggedIn },
+    { path: '/signup', component: Register, name: 'Register', beforeEnter: redirectIfLoggedIn },
 ];
