@@ -1,11 +1,13 @@
 <template>
   <div>
-    <div class="col-md-12">
-      <div class="col-md-6 m-auto" v-for="trip in trips" :key="trip.id">
-        <div class="col-md-4">
-          <img src="../../../images/placeholder.jpg" alt="" width="100%;">
+    <div class="col-md-12 row-space-3-bottom" v-for="trip in trips" :key="trip.id">
+      <div class="card">
+        <div class="card-body">
+          <div class="row">
+            <img src="../../../images/placeholder.jpg" alt="" class="list-trip-img">
+          </div>
+          
         </div>
-
       </div>
     </div>
   </div>
@@ -15,11 +17,11 @@
 export default {
   computed: {
     trips() {
-      return this.$store.getters.trips; 
+      return this.$store.getters.trips;
     }
   },
   created () {
-    console.log(this.$store.getters.trips);
+      console.log(this.$store.getters.trips)
   },
 }
 </script>

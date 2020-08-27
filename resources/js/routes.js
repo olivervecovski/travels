@@ -2,6 +2,7 @@ import Main from './components/Main.vue';
 import Login from './components/Login/Login.vue';
 import Register from './components/Login/Register.vue';
 import TripList from './components/Trips/TripList';
+import Home from './components/Home';
 import store from './store/index';
 
 function redirectIfLoggedIn(to, from, next) {
@@ -13,7 +14,7 @@ function redirectIfLoggedIn(to, from, next) {
 }
 
 export const routes = [
-    { path: '/', component: TripList, name: 'Trips'},
+    { path: '/', component: Home, name: 'Home'},
     { path: '/login', component: Login, name: 'Login', beforeEnter: redirectIfLoggedIn },
     { path: '/register', component: Register, name: 'Register', beforeEnter: redirectIfLoggedIn },
 ];
