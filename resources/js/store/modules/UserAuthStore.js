@@ -67,7 +67,7 @@ const userstore = {
       })
     },
     async loginWithProvider({commit}, provider, query) {
-      return await User.loginWithProvider(provider, query)
+      return await User.providerCallback(provider, query)
       .then(response => {
         localStorage.setItem('token', response.data.access_token);
         commit('auth_success', response.data.user);
