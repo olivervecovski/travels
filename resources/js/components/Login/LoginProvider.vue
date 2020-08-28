@@ -15,7 +15,7 @@ export default {
     RingLoader,
   },
   created () {
-    this.$store.dispatch('loginProvider', this.$route.params.provider, this.$route.query)
+    this.$store.dispatch('loginWithProvider', this.$route.params.provider, this.$route.query)
     .then(response => {
       if(response.success) {
         this.$toasted.success(response.message, {
