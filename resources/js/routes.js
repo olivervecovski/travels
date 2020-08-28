@@ -14,16 +14,26 @@ function redirectIfLoggedIn(to, from, next) {
 }
 
 export const routes = [
-    { path: '/',
-      component: Home,
-      name: 'Home'
+    { 
+        path: '/',
+        component: Home,
+        name: 'Home'
     },
-    { path: '/signin', 
-      component: Login, name: 'Login',
-      beforeEnter: redirectIfLoggedIn
+    { 
+        path: '/signin', 
+        component: Login, name: 'Login',
+        beforeEnter: redirectIfLoggedIn
     },
-    { path: '/signup',
-      component: Register, name: 'Register',
-      beforeEnter: redirectIfLoggedIn
-     },
+    { 
+        path: '/signup',
+        component: Register, name: 'Register',
+        beforeEnter: redirectIfLoggedIn
+    },
+    {
+        path: '/auth/:provider/callback',
+        name: 'login',
+        component: LoginProvider,
+        beforeEnter: redirectIfLoggedIn
+    },
+    
 ];

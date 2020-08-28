@@ -22,11 +22,12 @@ const userstore = {
   actions: {
     async authUser({commit}){
       const userData = await User.auth()
-      if(userData){
-        commit('auth_success', userData)
-      } else {
+      .then(response =>{
+        commit('auth_success', response.data)
+      })
+      .catch(err => {
         commit('logout');
-      }
+      });
     },
     async login({commit, state}, form) {
       return await User.login(form)
@@ -54,10 +55,6 @@ const userstore = {
       .catch(error => {
         localStorage.removeItem('token');
         commit('auth_error');
-        console.log(error)
-        console.log(error.response)
-        console.log(error.response.data)
-        console.log(error.response.data.message)
         return {'succcess': false, 'message': error.response.data.message, 'errors': error.response.data.errors};
       })
     },
@@ -67,6 +64,19 @@ const userstore = {
         commit('logout');
         localStorage.removeItem('token');
         return {'success': true, 'message': 'You are now logged out!'};
+      })
+    },
+    async loginWithProvider({commit}, provider, query) {
+      return await User.loginWithProvider(provider, query)
+      .then(response => {
+        localStorage.setItem('token', response.data.access_token);
+        commit('auth_success', response.data.user);
+        return {'success': true, 'message': "You are now signed in"};
+      })
+      .catch(err => {
+        commit('auth_error');
+        localStorage.removeItem('token');
+        return {'success': false, 'message': err.data.message};
       })
     }
   },

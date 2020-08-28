@@ -8425,8 +8425,6 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       this.$store.dispatch('logout').then(function (response) {
-        console.log(response);
-
         _this.$toasted.success(response.message, {
           icon: 'fa-check',
           duration: 3000,
@@ -8475,9 +8473,6 @@ __webpack_require__.r(__webpack_exports__);
     trips: function trips() {
       return this.$store.getters.trips;
     }
-  },
-  created: function created() {
-    console.log(this.$store.getters.trips);
   }
 });
 
@@ -64371,6 +64366,11 @@ var routes = [{
   component: _components_Login_Register_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
   name: 'Register',
   beforeEnter: redirectIfLoggedIn
+}, {
+  path: '/auth/:provider/callback',
+  name: 'login',
+  component: LoginProvider,
+  beforeEnter: redirectIfLoggedIn
 }];
 
 /***/ }),
@@ -64601,18 +64601,16 @@ var userstore = {
               case 0:
                 commit = _ref.commit;
                 _context.next = 3;
-                return _Helpers_User__WEBPACK_IMPORTED_MODULE_1__["default"].auth();
+                return _Helpers_User__WEBPACK_IMPORTED_MODULE_1__["default"].auth().then(function (response) {
+                  commit('auth_success', response.data);
+                })["catch"](function (err) {
+                  commit('logout');
+                });
 
               case 3:
                 userData = _context.sent;
 
-                if (userData) {
-                  commit('auth_success', userData);
-                } else {
-                  commit('logout');
-                }
-
-              case 5:
+              case 4:
               case "end":
                 return _context.stop();
             }
@@ -64677,10 +64675,6 @@ var userstore = {
                 })["catch"](function (error) {
                   localStorage.removeItem('token');
                   commit('auth_error');
-                  console.log(error);
-                  console.log(error.response);
-                  console.log(error.response.data);
-                  console.log(error.response.data.message);
                   return {
                     'succcess': false,
                     'message': error.response.data.message,
@@ -64709,6 +64703,42 @@ var userstore = {
           'message': 'You are now logged out!'
         };
       });
+    },
+    loginWithProvider: function loginWithProvider(_ref5, provider, query) {
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4() {
+        var commit;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
+          while (1) {
+            switch (_context4.prev = _context4.next) {
+              case 0:
+                commit = _ref5.commit;
+                _context4.next = 3;
+                return _Helpers_User__WEBPACK_IMPORTED_MODULE_1__["default"].loginWithProvider(provider, query).then(function (response) {
+                  localStorage.setItem('token', response.data.access_token);
+                  commit('auth_success', response.data.user);
+                  return {
+                    'success': true,
+                    'message': "You are now signed in"
+                  };
+                })["catch"](function (err) {
+                  commit('auth_error');
+                  localStorage.removeItem('token');
+                  return {
+                    'success': false,
+                    'message': err.data.message
+                  };
+                });
+
+              case 3:
+                return _context4.abrupt("return", _context4.sent);
+
+              case 4:
+              case "end":
+                return _context4.stop();
+            }
+          }
+        }, _callee4);
+      }))();
     }
   },
   modules: {},

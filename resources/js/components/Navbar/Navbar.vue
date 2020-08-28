@@ -41,7 +41,6 @@ export default {
     logout() {
       this.$store.dispatch('logout')
       .then(response => {
-        console.log(response)
         this.$toasted.success(response.message, {
             icon: 'fa-check',
             duration: 3000,

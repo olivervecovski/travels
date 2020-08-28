@@ -20,9 +20,6 @@ export default {
       return this.$store.getters.trips;
     }
   },
-  created () {
-      console.log(this.$store.getters.trips)
-  },
 }
 </script>
 
