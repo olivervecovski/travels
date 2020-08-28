@@ -33,6 +33,9 @@ export default {
       errorMessage: null
     }
   },
+  created() {
+    document.title = "Travels - Sign in";
+  },
   methods: {
     login(provider) {
       if(provider.length > 0) {

@@ -11,10 +11,10 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav ml-auto">
           <li :class="{'nav-item': true, 'active' : ($route.name == 'Login')}" v-if="!$store.getters.isLoggedIn">
-            <router-link to="/login" class="nav-link">Login</router-link>
+            <router-link to="/signin" class="nav-link">Sign in</router-link>
           </li>
           <li :class="{'nav-item': true, 'active' : ($route.name == 'Register')}" v-if="!$store.getters.isLoggedIn">
-            <router-link to="/register" class="nav-link">Sign up</router-link>
+            <router-link to="/signup" class="nav-link">Sign up</router-link>
           </li>
           
           <li class="nav-item dropdown" v-if="$store.getters.isLoggedIn">

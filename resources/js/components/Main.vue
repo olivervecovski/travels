@@ -25,6 +25,7 @@ export default {
     this.$store.dispatch('initialize');
   },
   created() {
+    document.title = "Travels";
   },
   computed: {
     loaded() {

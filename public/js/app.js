@@ -8113,6 +8113,9 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {};
+  },
+  created: function created() {
+    document.title = "Travels";
   }
 });
 
@@ -8161,6 +8164,9 @@ __webpack_require__.r(__webpack_exports__);
       },
       errorMessage: null
     };
+  },
+  created: function created() {
+    document.title = "Travels - Sign in";
   },
   methods: {
     login: function login(provider) {
@@ -8354,7 +8360,9 @@ __webpack_require__.r(__webpack_exports__);
   beforeCreate: function beforeCreate() {
     this.$store.dispatch('initialize');
   },
-  created: function created() {},
+  created: function created() {
+    document.title = "Travels";
+  },
   computed: {
     loaded: function loaded() {
       return this.$store.getters.loaded;
@@ -47233,8 +47241,8 @@ var render = function() {
                       [
                         _c(
                           "router-link",
-                          { staticClass: "nav-link", attrs: { to: "/login" } },
-                          [_vm._v("Login")]
+                          { staticClass: "nav-link", attrs: { to: "/signin" } },
+                          [_vm._v("Sign in")]
                         )
                       ],
                       1
@@ -47253,10 +47261,7 @@ var render = function() {
                       [
                         _c(
                           "router-link",
-                          {
-                            staticClass: "nav-link",
-                            attrs: { to: "/register" }
-                          },
+                          { staticClass: "nav-link", attrs: { to: "/signup" } },
                           [_vm._v("Sign up")]
                         )
                       ],
