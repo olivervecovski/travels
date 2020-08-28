@@ -8244,7 +8244,7 @@ __webpack_require__.r(__webpack_exports__);
   created: function created() {
     var _this = this;
 
-    this.$store.dispatch('loginProvider', this.$route.params.provider, this.$route.query).then(function (response) {
+    this.$store.dispatch('loginWithProvider', this.$route.params.provider, this.$route.query).then(function (response) {
       if (response.success) {
         _this.$toasted.success(response.message, {
           icon: 'fa-check',
@@ -64883,7 +64883,7 @@ var userstore = {
               case 0:
                 commit = _ref5.commit;
                 _context4.next = 3;
-                return _Helpers_User__WEBPACK_IMPORTED_MODULE_1__["default"].loginWithProvider(provider, query).then(function (response) {
+                return _Helpers_User__WEBPACK_IMPORTED_MODULE_1__["default"].providerCallback(provider, query).then(function (response) {
                   localStorage.setItem('token', response.data.access_token);
                   commit('auth_success', response.data.user);
                   return {
