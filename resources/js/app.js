@@ -11,6 +11,7 @@ import Toasted from 'vue-toasted'
 
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { fab } from '@fortawesome/free-brands-svg-icons';
+import { fas } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
 
@@ -19,6 +20,7 @@ require('./bootstrap');
 window.Vue = require('vue');
 
 library.add(fab);
+library.add(fas);
 Vue.component('fa', FontAwesomeIcon);
 
 Vue.use(Toasted, {

@@ -1,8 +1,12 @@
 <template>
   <div v-if="loaded">
-    <navbar></navbar>
+    <div class="container sticky-top sticky-offset-logo">
+        <img src="../../images/travelslogo.png" alt="" class="navbar-logo">
+    </div>
+    <navbar />
     <div class="container">
       <router-view></router-view>
+      <div class="floating-ab" tooltip="Go to top" @click="scroll"><fa icon="arrow-up" /></div>
     </div>
   </div>
   <div v-else class="loading-page">
@@ -30,6 +34,15 @@ export default {
   computed: {
     loaded() {
       return this.$store.getters.loaded
+    }
+  },
+  methods: {
+    scroll() {
+      window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: 'smooth'
+      });
     }
   },
 }

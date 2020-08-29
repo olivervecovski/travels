@@ -16,7 +16,7 @@ export default {
   },
   created () {
     console.log(this.$route.query)
-    this.$store.dispatch('loginWithProvider', this.$route.params.provider, this.$route.query)
+    this.$store.dispatch('loginWithProvider', {'provider': this.$route.params.provider, 'query': this.$route.query})
     .then(response => {
       if(response.success) {
         this.$toasted.success(response.message, {

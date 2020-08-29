@@ -24,5 +24,6 @@
     <div id="app">
         <main-app></main-app>
     </div>
+    <script src="/js/travels.js" defer></script>
 </body>
 </html>

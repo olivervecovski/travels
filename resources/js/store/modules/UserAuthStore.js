@@ -56,6 +56,7 @@ const userstore = {
       .catch(error => {
         localStorage.removeItem('token');
         commit('auth_error');
+        console.log(error.response.data)
         return {'success': false, 'message': error.response.data.message, 'errors': error.response.data.errors};
       })
     },
@@ -67,8 +68,8 @@ const userstore = {
         return {'success': true, 'message': 'You are now logged out!'};
       })
     },
-    async loginWithProvider({commit}, provider, query) {
-      return await User.providerCallback(provider, query)
+    async loginWithProvider({commit}, payload) {
+      return await User.providerCallback(payload.provider, payload.query)
       .then(response => {
         localStorage.setItem('token', response.data.access_token);
         commit('auth_success', response.data.user);

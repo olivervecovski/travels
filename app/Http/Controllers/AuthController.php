@@ -37,7 +37,7 @@ class AuthController extends Controller
                 'success' => false,
                 'message' => 'Email already exists',
                 'errors' => [
-                    'email' => 'Email already exists'
+                    'email' => ['Email already exists']
                 ]
             ], 403);
          }
@@ -88,7 +88,7 @@ class AuthController extends Controller
             $appUser = User::create([
                 'name' => $user->name,
                 'email' => $user->email,
-                'password' => Str::random(7)
+                'password' => Str::random(10)
             ]);
 
             $this->createSocialAccount($appUser, $user->id, $provider);
