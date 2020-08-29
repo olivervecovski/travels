@@ -72080,6 +72080,7 @@ var userstore = {
     },
     auth_error: function auth_error(state) {
       state.status = 'error';
+      localStorage.removeItem('token');
     },
     logout: function logout(state) {
       state.status = '';

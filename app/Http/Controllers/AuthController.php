@@ -97,9 +97,7 @@ class AuthController extends Controller
         // login user
         $access_token = $appUser->createToken('Auth Token')->accessToken;
 
-        $this->respondWithToken($access_token, $appUser);
-
-        
+        return $this->respondWithToken($access_token, $appUser);
     }
 
     private function createSocialAccount($user, $provider_id, $provider) {

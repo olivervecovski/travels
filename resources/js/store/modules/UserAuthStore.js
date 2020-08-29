@@ -13,6 +13,7 @@ const userstore = {
     },
     auth_error(state) {
       state.status = 'error';
+      localStorage.removeItem('token');
     },
     logout(state) {
       state.status = '';
@@ -23,7 +24,7 @@ const userstore = {
     async authUser({commit}){
       await User.auth()
       .then(response =>{
-        if(response) commit('auth_success', response)
+        if(response) commit('auth_success', response);
         else commit('logout');
       })
       .catch(err => {
