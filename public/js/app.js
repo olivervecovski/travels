@@ -15261,7 +15261,6 @@ __webpack_require__.r(__webpack_exports__);
   created: function created() {
     var _this = this;
 
-    console.log(this.$route.query);
     this.$store.dispatch('loginWithProvider', {
       'provider': this.$route.params.provider,
       'query': this.$route.query
@@ -71055,7 +71054,6 @@ var api_base = process.env.VUE_APP_API_BASE;
     return Object(_Api__WEBPACK_IMPORTED_MODULE_1__["default"])().get("/auth/social/".concat(provider));
   },
   providerCallback: function providerCallback(provider, payload) {
-    console.log(payload);
     return Object(_Api__WEBPACK_IMPORTED_MODULE_1__["default"])().get("/auth/social/".concat(provider, "/callback"), {
       params: payload
     });
@@ -71914,10 +71912,13 @@ vue__WEBPACK_IMPORTED_MODULE_1___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_2__
                 return dispatch('authUser');
 
               case 3:
-                //await dispatch('getTrips');
+                _context.next = 5;
+                return dispatch('getTrips');
+
+              case 5:
                 commit('setloaded', true);
 
-              case 4:
+              case 6:
               case "end":
                 return _context.stop();
             }

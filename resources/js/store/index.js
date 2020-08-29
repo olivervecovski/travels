@@ -10,7 +10,7 @@ export default new Vuex.Store({
   actions: {
     async initialize ({commit, dispatch}){
       await dispatch('authUser');
-      //await dispatch('getTrips');
+      await dispatch('getTrips');
       commit('setloaded', true);
     }
   },

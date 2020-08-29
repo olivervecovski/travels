@@ -30,7 +30,6 @@ export default {
   },
 
   providerCallback(provider, payload) {
-    console.log(payload)
     return Api().get(`/auth/social/${provider}/callback`, {
       params: payload
     });
