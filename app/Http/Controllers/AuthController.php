@@ -23,12 +23,8 @@ class AuthController extends Controller
                 'message' => 'The provided credentials are incorrect'
             ], 403);
         }
-
-        return response()->json([
-            'success' => true,
-            'user' => $user,
-            'access_token' => $user->createToken('Auth Token')->accessToken,
-        ], 200);
+        
+        return $this->respondWithToken($user->createToken('Auth Token')->accessToken, $user);
     }
 
     public function signup(SignupRequest $request) {
@@ -101,9 +97,7 @@ class AuthController extends Controller
         // login user
         $access_token = $appUser->createToken('Auth Token')->accessToken;
 
-        return response()->json([
-            'access_token' => $access_token
-        ]);
+        $this->respondWithToken($access_token, $appUser);
 
         
     }
@@ -122,12 +116,11 @@ class AuthController extends Controller
         }
     }
 
-    protected function respondWithToken($token) {
+    protected function respondWithToken($token, $user) {
         return response()->json([
             'access_token' => $token,
             'token_type' => 'bearer',
-            'expires_in' => auth()->factory()->getTTL() * 60,
-            'user' => auth()->user()
-        ]);
+            'user' => $user
+        ], 200);
     }
 }
