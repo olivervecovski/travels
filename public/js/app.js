@@ -8499,7 +8499,7 @@ __webpack_require__.r(__webpack_exports__);
           }
         });
 
-        _this.$router.push('Home');
+        _this.$router.push('/');
       });
     }
   }
@@ -47379,7 +47379,13 @@ var render = function() {
                             "aria-expanded": "false"
                           }
                         },
-                        [_vm._v("\n            Dropdown\n          ")]
+                        [
+                          _vm._v(
+                            "\n            " +
+                              _vm._s(_vm.$store.getters.user.name) +
+                              "\n          "
+                          )
+                        ]
                       ),
                       _vm._v(" "),
                       _c(
@@ -64765,7 +64771,7 @@ var userstore = {
   actions: {
     authUser: function authUser(_ref) {
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-        var commit, userData;
+        var commit;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
@@ -64773,15 +64779,12 @@ var userstore = {
                 commit = _ref.commit;
                 _context.next = 3;
                 return _Helpers_User__WEBPACK_IMPORTED_MODULE_1__["default"].auth().then(function (response) {
-                  commit('auth_success', response.data);
+                  if (response) commit('auth_success', response);else commit('logout');
                 })["catch"](function (err) {
                   commit('logout');
                 });
 
               case 3:
-                userData = _context.sent;
-
-              case 4:
               case "end":
                 return _context.stop();
             }
@@ -64839,7 +64842,6 @@ var userstore = {
                 return _Helpers_User__WEBPACK_IMPORTED_MODULE_1__["default"].signup(form).then(function (response) {
                   localStorage.setItem('token', response.data.access_token);
                   commit('auth_success', response.data.user);
-                  console.log(response.data.user);
                   return {
                     'success': true,
                     'message': 'Successfully signed up!'
@@ -64917,6 +64919,9 @@ var userstore = {
   getters: {
     isLoggedIn: function isLoggedIn(state) {
       return state.status === 'success' ? true : false;
+    },
+    user: function user(state) {
+      return state.user;
     }
   }
 };

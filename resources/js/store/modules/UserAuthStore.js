@@ -21,9 +21,10 @@ const userstore = {
   },
   actions: {
     async authUser({commit}){
-      const userData = await User.auth()
+      await User.auth()
       .then(response =>{
-        commit('auth_success', response.data)
+        if(response) commit('auth_success', response)
+        else commit('logout');
       })
       .catch(err => {
         commit('logout');
@@ -82,7 +83,8 @@ const userstore = {
   },
   modules: {},
   getters: {
-    isLoggedIn: state => state.status === 'success' ? true : false
+    isLoggedIn: state => state.status === 'success' ? true : false,
+    user: state => state.user
   }
 };
 

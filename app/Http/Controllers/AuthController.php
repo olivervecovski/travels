@@ -32,6 +32,15 @@ class AuthController extends Controller
     }
 
     public function signup(SignupRequest $request) {
+        if (User::where('email', '=', $request->email)->count() > 0) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Email already exists',
+                'errors' => [
+                    'email' => 'Email already exists'
+                ]
+            ], 403);
+         }
         if(User::create($request->all())) {
             $loginResponse = $this->login($request);
         }
