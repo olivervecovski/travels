@@ -42,7 +42,7 @@ const userstore = {
       .catch(error => {
         commit('auth_error');
         localStorage.removeItem('token');
-        return {'succcess': false, 'message': 'The provided credentials are incorrect!'};
+        return {'success': false, 'message': 'The provided credentials are incorrect!'};
       });
     },
     async signup({commit}, form) {
@@ -50,12 +50,12 @@ const userstore = {
       .then(response => {
         localStorage.setItem('token', response.data.access_token);
         commit('auth_success', response.data.user);
-        return {'succcess': true, 'message': 'Successfully signed up!'};
+        return {'success': true, 'message': 'Successfully signed up!'};
       })
       .catch(error => {
         localStorage.removeItem('token');
         commit('auth_error');
-        return {'succcess': false, 'message': error.response.data.message, 'errors': error.response.data.errors};
+        return {'success': false, 'message': error.response.data.message, 'errors': error.response.data.errors};
       })
     },
     logout({commit}) {

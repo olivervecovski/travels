@@ -64811,7 +64811,7 @@ var userstore = {
                   commit('auth_error');
                   localStorage.removeItem('token');
                   return {
-                    'succcess': false,
+                    'success': false,
                     'message': 'The provided credentials are incorrect!'
                   };
                 });
@@ -64839,15 +64839,16 @@ var userstore = {
                 return _Helpers_User__WEBPACK_IMPORTED_MODULE_1__["default"].signup(form).then(function (response) {
                   localStorage.setItem('token', response.data.access_token);
                   commit('auth_success', response.data.user);
+                  console.log(response.data.user);
                   return {
-                    'succcess': true,
+                    'success': true,
                     'message': 'Successfully signed up!'
                   };
                 })["catch"](function (error) {
                   localStorage.removeItem('token');
                   commit('auth_error');
                   return {
-                    'succcess': false,
+                    'success': false,
                     'message': error.response.data.message,
                     'errors': error.response.data.errors
                   };
