@@ -8244,6 +8244,7 @@ __webpack_require__.r(__webpack_exports__);
   created: function created() {
     var _this = this;
 
+    console.log(this.$route.query);
     this.$store.dispatch('loginWithProvider', this.$route.params.provider, this.$route.query).then(function (response) {
       if (response.success) {
         _this.$toasted.success(response.message, {

@@ -15,6 +15,7 @@ export default {
     RingLoader,
   },
   created () {
+    console.log(this.$route.query)
     this.$store.dispatch('loginWithProvider', this.$route.params.provider, this.$route.query)
     .then(response => {
       if(response.success) {
