@@ -5,6 +5,7 @@ import TripList from './components/Trips/TripList';
 import Home from './components/Home';
 import LoginProvider from './components/Login/LoginProvider.vue';
 import ForgotPassword from './components/Login/ForgotPassword.vue';
+import ResetPassword from './components/Login/ResetPassword.vue';
 import store from './store/index';
 
 function redirectIfLoggedIn(to, from, next) {
@@ -13,6 +14,10 @@ function redirectIfLoggedIn(to, from, next) {
     } else {
         next('/');
     }
+}
+
+function haveToken(to, from, next) {
+    to.query.token ? next() : next('/')
 }
 
 export const routes = [
@@ -41,6 +46,11 @@ export const routes = [
         path: '/forgot-password',
         component: ForgotPassword,
         beforeEnter: redirectIfLoggedIn
+    },
+    {
+        path: '/reset-password',
+        component: ResetPassword,
+        beforeEnter: haveToken
     },
     
 ];

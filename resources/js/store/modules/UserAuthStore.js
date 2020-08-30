@@ -97,6 +97,15 @@ const userstore = {
       .catch(err => {
         return {'success': false, 'message': response.data.message};
       })
+    },
+    async resetPassword({commit}, form) {
+      return await User.resetPassword(form)
+      .then(response => {
+        return {'success': true, 'message': response.data.message};
+      })
+      .catch(err => {
+        return {'success': false, 'message': response.data.message};
+      })
     }
   },
   modules: {},
