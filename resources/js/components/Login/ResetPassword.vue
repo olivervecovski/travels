@@ -32,14 +32,17 @@ export default {
       form: {
         password : null,
         password_confirmation: null,
-        token: null
+        token: null,
+        email: null
       },
-      loading: false
+      loading: false,
+      beforeLoad: true
     }
   },
   methods: {
     reset() {
       this.form.token = this.$route.query.token;
+      this.form.email = this.$route.query.email;
       this.loading = true;
       this.$store.dispatch('resetPassword', this.form)
       .then(res => {
@@ -71,6 +74,28 @@ export default {
         }
       });
     }
+  },
+  beforeCreate () {
+    let beforeForm = {
+      token: this.$route.query.email
+    }
+    
+    this.$store.dispatch('checkPasswordToken', beforeForm)
+    .then(res => {
+      this.beforeLoad = false;
+    })
+    .catch(err =>{
+      this.$toasted.error(err.message, {
+        icon: 'fa-times',
+        duration: 5000,
+        action : {
+          text : 'Close',
+          onClick : (e, toastObject) => {
+              toastObject.goAway(0);
+          }
+        },
+      })
+    })
   },
 }
 </script>

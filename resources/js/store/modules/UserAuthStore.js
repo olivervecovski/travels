@@ -106,6 +106,15 @@ const userstore = {
       .catch(err => {
         return {'success': false, 'message': response.data.message};
       })
+    },
+    async checkPasswordToken({commit}, form) {
+      return await User.checkToken(form)
+      .then(response => {
+        
+      })
+      .catch(err => {
+
+      });
     }
   },
   modules: {},

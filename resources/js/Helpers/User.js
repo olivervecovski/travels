@@ -42,4 +42,8 @@ export default {
   resetPassword(form) {
     return Api().post('/auth/reset-password', form);
   },
+
+  checkToken(form) {
+    return Api().post('/auth/check-token', form);
+  }
 }

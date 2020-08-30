@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CheckTokenRequest;
 use App\Http\Requests\SignupRequest;
 use App\Models\Social_Account;
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Laravel\Socialite\Facades\Socialite;
 use Illuminate\Support\Str;
@@ -98,6 +101,32 @@ class AuthController extends Controller
         $access_token = $appUser->createToken('Auth Token')->accessToken;
 
         return $this->respondWithToken($access_token, $appUser);
+    }
+
+    public function checkToken(CheckTokenRequest $request) 
+    {
+        $pw_reset = DB::table('password_resets')->where('email', '=', $request->email)->first();
+        dd($pw_reset);
+        $msg = '';
+        $status = 200;
+        $email = '';
+
+        if(!$pw_reset) {
+            $msg = 'Password reset token does not exist';
+            $status = 404;
+        } else {
+            dd($pw_reset);
+            if($pw_reset->created_at->diffInHours(Carbon::now(), false) > 1) {
+                $msg = 'Password reset token have expired';
+                $status = 403;
+            } else {
+                $email = $pw_reset->email;
+            }
+        }
+
+        return response()->json([
+            'message' => $msg,
+        ], $status);
     }
 
     private function createSocialAccount($user, $provider_id, $provider) {

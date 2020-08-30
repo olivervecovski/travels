@@ -15575,9 +15575,11 @@ __webpack_require__.r(__webpack_exports__);
       form: {
         password: null,
         password_confirmation: null,
-        token: null
+        token: null,
+        email: null
       },
-      loading: false
+      loading: false,
+      beforeLoad: true
     };
   },
   methods: {
@@ -15585,6 +15587,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       this.form.token = this.$route.query.token;
+      this.form.email = this.$route.query.email;
       this.loading = true;
       this.$store.dispatch('resetPassword', this.form).then(function (res) {
         if (res.success) {
@@ -15618,6 +15621,27 @@ __webpack_require__.r(__webpack_exports__);
         }
       });
     }
+  },
+  beforeCreate: function beforeCreate() {
+    var _this2 = this;
+
+    var beforeForm = {
+      token: this.$route.query.email
+    };
+    this.$store.dispatch('checkPasswordToken', beforeForm).then(function (res) {
+      _this2.beforeLoad = false;
+    })["catch"](function (err) {
+      _this2.$toasted.error(err.message, {
+        icon: 'fa-times',
+        duration: 5000,
+        action: {
+          text: 'Close',
+          onClick: function onClick(e, toastObject) {
+            toastObject.goAway(0);
+          }
+        }
+      });
+    });
   }
 });
 
@@ -71824,6 +71848,9 @@ var api_base = process.env.VUE_APP_API_BASE;
   },
   resetPassword: function resetPassword(form) {
     return Object(_Api__WEBPACK_IMPORTED_MODULE_1__["default"])().post('/auth/reset-password', form);
+  },
+  checkToken: function checkToken(form) {
+    return Object(_Api__WEBPACK_IMPORTED_MODULE_1__["default"])().post('/auth/check-token', form);
   }
 });
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../../node_modules/process/browser.js */ "./node_modules/process/browser.js")))
@@ -73218,6 +73245,28 @@ var userstore = {
             }
           }
         }, _callee6);
+      }))();
+    },
+    checkPasswordToken: function checkPasswordToken(_ref8, form) {
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee7() {
+        var commit;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee7$(_context7) {
+          while (1) {
+            switch (_context7.prev = _context7.next) {
+              case 0:
+                commit = _ref8.commit;
+                _context7.next = 3;
+                return _Helpers_User__WEBPACK_IMPORTED_MODULE_1__["default"].checkToken(form).then(function (response) {})["catch"](function (err) {});
+
+              case 3:
+                return _context7.abrupt("return", _context7.sent);
+
+              case 4:
+              case "end":
+                return _context7.stop();
+            }
+          }
+        }, _callee7);
       }))();
     }
   },
