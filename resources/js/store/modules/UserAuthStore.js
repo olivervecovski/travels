@@ -21,6 +21,7 @@ const userstore = {
     }
   },
   actions: {
+
     async authUser({commit}){
       await User.auth()
       .then(response =>{
@@ -31,6 +32,7 @@ const userstore = {
         commit('logout');
       });
     },
+
     async login({commit, state}, form) {
       return await User.login(form)
       .then(response => {
@@ -47,6 +49,7 @@ const userstore = {
         return {'success': false, 'message': 'The provided credentials are incorrect!'};
       });
     },
+
     async signup({commit}, form) {
       return await User.signup(form)
       .then(response => {
@@ -61,6 +64,7 @@ const userstore = {
         return {'success': false, 'message': error.response.data.message, 'errors': error.response.data.errors};
       })
     },
+
     logout({commit}) {
       return User.logout()
       .then(response => {
@@ -69,6 +73,7 @@ const userstore = {
         return {'success': true, 'message': 'You are now logged out!'};
       })
     },
+
     async loginWithProvider({commit}, payload) {
       return await User.providerCallback(payload.provider, payload.query)
       .then(response => {
@@ -80,6 +85,17 @@ const userstore = {
         commit('auth_error');
         localStorage.removeItem('token');
         return {'success': false, 'message': err.data.message};
+      })
+    },
+
+    async forgotPassword({commit}, form) {
+      return await User.forgotPassword(form)
+      .then(response => {
+        console.log(response);
+        return {'success': true, 'message': response.data.message};
+      })
+      .catch(err => {
+        return {'success': false, 'message': response.data.message};
       })
     }
   },

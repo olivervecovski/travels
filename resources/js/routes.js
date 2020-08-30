@@ -4,6 +4,7 @@ import Register from './components/Login/Register.vue';
 import TripList from './components/Trips/TripList';
 import Home from './components/Home';
 import LoginProvider from './components/Login/LoginProvider.vue';
+import ForgotPassword from './components/Login/ForgotPassword.vue';
 import store from './store/index';
 
 function redirectIfLoggedIn(to, from, next) {
@@ -34,6 +35,11 @@ export const routes = [
         path: '/auth/:provider/callback',
         name: 'login',
         component: LoginProvider,
+        beforeEnter: redirectIfLoggedIn
+    },
+    {
+        path: '/forgot-password',
+        component: ForgotPassword,
         beforeEnter: redirectIfLoggedIn
     },
     

@@ -22,7 +22,7 @@ export default new Vuex.Store({
   },
   getters: {
     loaded: state => {
-      return state.loaded;
+      return state.loaded
     }
   }
 });

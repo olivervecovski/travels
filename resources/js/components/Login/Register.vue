@@ -22,7 +22,12 @@
           <div class="form-group">
             <input type="password" class="form-control" placeholder="Confirm password" v-model="form.password_confirmation">
           </div>
-          <button class="btn btn-block btn-form" @click="signup('')" >Sign up</button>
+          <button class="btn btn-block btn-form" @click="signup('')" >
+            <span v-if="!loading">Sign up</span> 
+            <SyncLoader :color="'#60b0f196'" v-else/>
+          </button>
+          <h5 class="line-word mb-4"><span>OR</span></h5>
+          <button class="btn btn-block mb-4 btn-google" @click="signup('google')"><fa class="mr-4" :icon="['fab', 'google']"></fa>Sign in with Google</button>
         </div>
       </div>
     </div>
@@ -32,7 +37,11 @@
 
 <script>
 import User from "../../Helpers/User"
+import SyncLoader from 'vue-spinner/src/SyncLoader';
 export default {
+  components: {
+    SyncLoader,
+  },
   data() {
     return {
       errorMessage: null,
@@ -42,7 +51,8 @@ export default {
         password: null,
         password_confirmation: null
       },
-      errors: {}
+      errors: {},
+      loading: false
     }
   },
   methods: {
@@ -56,10 +66,12 @@ export default {
           }
         })
       } else {
+        this.loading = true;
         this.$store.dispatch('signup', this.form)
         .then(response => {
           if(response.success) {
             this.errors = {};
+            this.loading = false;
             this.$toasted.success(response.message, {
               icon: 'fa-check',
               duration: 3000,
@@ -74,6 +86,7 @@ export default {
           } else {
             this.errorMessage = response.message;
             this.errors = response.errors;
+            this.loading = false;
             this.$toasted.error(response.message, {
               icon: 'fa-times',
               duration: 5000,

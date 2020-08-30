@@ -33,5 +33,13 @@ export default {
     return Api().get(`/auth/social/${provider}/callback`, {
       params: payload
     });
-  }
+  },
+
+  forgotPassword(form) {
+    return Api().post('/auth/forgot-password', form);
+  },
+
+  resetPassword(form) {
+    return Api().post('/auth/reset-password', form);
+  },
 }

@@ -11,7 +11,7 @@
   </div>
   <div v-else class="loading-page">
     <div>
-      <RingLoader :loading="true" :color="'#343a40'" :size="'100px'" class="m-auto"></RingLoader>
+      <RingLoader :loading="true" :color="'#343a40'" :size="'100px'" class="m-auto v-spinner-ring"></RingLoader>
     </div>
   </div>
 </template>
@@ -33,7 +33,7 @@ export default {
   },
   computed: {
     loaded() {
-      return this.$store.getters.loaded
+      return this.$store.getters.loaded;
     }
   },
   methods: {

@@ -1,20 +1,26 @@
 <template>
-  <div>
-    <div class="loading-page">
-      <div>
-        <RingLoader :loading="true" :color="'#343a40'" :size="'100px'" class="m-auto"></RingLoader>
+  <div class="container">
+    <div class="m-auto col-sm-12 col-lg-6">
+      <div class="card">
+        <div class="card-header bg-dark"><div class="text-center"><img src="../../../images/travelslogo.png" alt="" class="form-logo"></div></div>
+        <div class="card-body">
+          <h5 class="text-center mb-4">Signing you in with {{provider}}</h5>
+          <SyncLoader class="text-center" :color="'#60b0f196'"/>
+        </div>
       </div>
     </div>
+    
   </div>
 </template>
 
 <script>
-import RingLoader from 'vue-spinner/src/RingLoader'
+import SyncLoader from 'vue-spinner/src/SyncLoader'
 export default {
   components: {
-    RingLoader,
+    SyncLoader,
   },
   created () {
+    return;
     this.$store.dispatch('loginWithProvider', {'provider': this.$route.params.provider, 'query': this.$route.query})
     .then(response => {
       if(response.success) {
@@ -47,6 +53,12 @@ export default {
     .catch(err => {
       console.log(err);
     })
+  },
+  computed: {
+    provider() {
+      let prov = this.$route.params.provider
+      return prov.charAt(0).toUpperCase() + prov.slice(1);
+    }
   },
 }
 </script>
