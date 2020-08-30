@@ -33,6 +33,7 @@ Route::group([
     Route::post('forgot-password', 'ForgotPasswordController@sendResetLinkEmail');
     Route::post('reset-password', 'ResetPasswordController@reset');
     Route::post('check-token', 'AuthController@checkToken');
+    Route::get('email-verification', 'VerificationController@verify')->name('verification.verify');
     Route::get('social/{provider}', 'AuthController@redirectToProvider');
     Route::get('social/{provider}/callback', 'AuthController@handleProviderCallback');
 });

@@ -26,7 +26,7 @@
             <span v-if="!loading">Sign up</span> 
             <SyncLoader :color="'#60b0f196'" v-else/>
           </button>
-          <h5 class="line-word mb-4"><span>OR</span></h5>
+          <h5 class="line-word my-4"><span>OR</span></h5>
           <button class="btn btn-block mb-4 btn-google" @click="signup('google')"><fa class="mr-4" :icon="['fab', 'google']"></fa>Sign in with Google</button>
         </div>
       </div>
@@ -84,9 +84,9 @@ export default {
             })
             this.$router.push('/');
           } else {
+            this.loading = false;
             this.errorMessage = response.message;
             this.errors = response.errors;
-            this.loading = false;
             this.$toasted.error(response.message, {
               icon: 'fa-times',
               duration: 5000,

@@ -15509,9 +15509,9 @@ __webpack_require__.r(__webpack_exports__);
 
             _this.$router.push('/');
           } else {
+            _this.loading = false;
             _this.errorMessage = response.message;
             _this.errors = response.errors;
-            _this.loading = false;
 
             _this.$toasted.error(response.message, {
               icon: 'fa-times',
@@ -54860,7 +54860,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("h5", { staticClass: "line-word mb-4" }, [
+    return _c("h5", { staticClass: "line-word my-4" }, [
       _c("span", [_vm._v("OR")])
     ])
   }

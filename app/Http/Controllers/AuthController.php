@@ -22,8 +22,13 @@ class AuthController extends Controller
 
         if(!$user || !Hash::check($request->password, $user->password)) {
             return response()->json([
-                'success' => false,
                 'message' => 'The provided credentials are incorrect'
+            ], 403);
+        }
+        
+        if(!$user->email_verified_at){
+            return response()->json([
+                'message' => 'You need to verify your email before you can sign in'
             ], 403);
         }
         
@@ -40,11 +45,13 @@ class AuthController extends Controller
                 ]
             ], 403);
          }
-        if(User::create($request->all())) {
-            $loginResponse = $this->login($request);
-        }
+         $user = User::create($request->all());
 
-        return $loginResponse;
+        $user->sendEmailVerificationNotification;
+
+        return response()->json([
+            'message' => 'Verification email sent'
+        ], 200);
     }
 
     public function me() {
