@@ -54318,7 +54318,7 @@ var render = function() {
                 "div",
                 {
                   staticClass: "floating-ab",
-                  attrs: { tooltip: "Go to top" },
+                  attrs: { tooltip: "Go to top", title: "Go to top" },
                   on: { click: _vm.scroll }
                 },
                 [_c("fa", { attrs: { icon: "arrow-up" } })],

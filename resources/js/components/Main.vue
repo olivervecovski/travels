@@ -6,7 +6,7 @@
     <navbar />
     <div class="container">
       <router-view></router-view>
-      <div class="floating-ab" tooltip="Go to top" @click="scroll"><fa icon="arrow-up" /></div>
+      <div class="floating-ab" tooltip="Go to top" title="Go to top" @click="scroll"><fa icon="arrow-up" /></div>
     </div>
   </div>
   <div v-else class="loading-page">
