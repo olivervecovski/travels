@@ -19,7 +19,14 @@ class VerificationController extends Controller
      */
     public function verify(Request $request)
     {
-      $user = User::findOrFail($request->id);
+      $user = User::find($request->id);
+
+      if(!$user) {
+        return response()->json([
+          "message" => 'Could not find user',
+          'id' => $request
+        ], 404);
+      }
 
       // if (! hash_equals((string) $request->id, (string) $user->getKey())) {
       //   throw new AuthorizationException;

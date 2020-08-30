@@ -45,5 +45,11 @@ export default {
 
   checkToken(form) {
     return Api().post('/auth/check-token', form);
+  },
+
+  verifyEmail(form) {
+    return Api().get('/auth/email-verification', {
+      params: form
+    });
   }
 }

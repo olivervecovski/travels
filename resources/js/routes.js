@@ -6,6 +6,7 @@ import Home from './components/Home';
 import LoginProvider from './components/Login/LoginProvider.vue';
 import ForgotPassword from './components/Login/ForgotPassword.vue';
 import ResetPassword from './components/Login/ResetPassword.vue';
+import VerifyEmail from './components/Login/VerifyEmail.vue';
 import store from './store/index';
 
 function redirectIfLoggedIn(to, from, next) {
@@ -52,5 +53,11 @@ export const routes = [
         component: ResetPassword,
         beforeEnter: haveToken
     },
+    {
+        path: '/verify-email',
+        component: VerifyEmail,
+        beforeEnter: redirectIfLoggedIn
+    }
+    
     
 ];

@@ -47,7 +47,7 @@ class AuthController extends Controller
          }
          $user = User::create($request->all());
 
-        $user->sendEmailVerificationNotification;
+        $user->sendEmailVerificationNotification();
 
         return response()->json([
             'message' => 'Verification email sent'

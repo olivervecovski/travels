@@ -15647,6 +15647,73 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Login/VerifyEmail.vue?vue&type=script&lang=js&":
+/*!****************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Login/VerifyEmail.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vue_spinner_src_SyncLoader__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-spinner/src/SyncLoader */ "./node_modules/vue-spinner/src/SyncLoader.vue");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  components: {
+    SyncLoader: vue_spinner_src_SyncLoader__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
+  created: function created() {
+    var _this = this;
+
+    this.$store.dispatch('verifyEmail', this.$route.query).then(function (res) {
+      if (res.success) {
+        _this.$toasted.success(res.message, {
+          icon: 'fa-check',
+          duration: 3000,
+          action: {
+            text: 'Close',
+            onClick: function onClick(e, toastObject) {
+              toastObject.goAway(0);
+            }
+          }
+        });
+
+        _this.$router.push('/login');
+      } else {
+        _this.$toasted.error(res.message, {
+          icon: 'fa-times',
+          duration: 5000,
+          action: {
+            text: 'Close',
+            onClick: function onClick(e, toastObject) {
+              toastObject.goAway(0);
+            }
+          }
+        });
+
+        _this.$router.push('/');
+      }
+    });
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Main.vue?vue&type=script&lang=js&":
 /*!***************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Main.vue?vue&type=script&lang=js& ***!
@@ -54983,6 +55050,66 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Login/VerifyEmail.vue?vue&type=template&id=7f776b82&":
+/*!********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Login/VerifyEmail.vue?vue&type=template&id=7f776b82& ***!
+  \********************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "container" }, [
+    _c("div", { staticClass: "m-auto col-sm-12 col-lg-6" }, [
+      _c("div", { staticClass: "card" }, [
+        _vm._m(0),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "card-body" },
+          [
+            _c("h5", { staticClass: "text-center mb-4" }, [
+              _vm._v("Verifying your email")
+            ]),
+            _vm._v(" "),
+            _c("SyncLoader", {
+              staticClass: "text-center",
+              attrs: { color: "#60b0f196" }
+            })
+          ],
+          1
+        )
+      ])
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "card-header bg-dark" }, [
+      _c("div", { staticClass: "text-center" }, [
+        _c("img", {
+          staticClass: "form-logo",
+          attrs: { src: __webpack_require__(/*! ../../../images/travelslogo.png */ "./resources/images/travelslogo.png"), alt: "" }
+        })
+      ])
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Main.vue?vue&type=template&id=b9c20fb8&":
 /*!*******************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Main.vue?vue&type=template&id=b9c20fb8& ***!
@@ -71851,6 +71978,11 @@ var api_base = process.env.VUE_APP_API_BASE;
   },
   checkToken: function checkToken(form) {
     return Object(_Api__WEBPACK_IMPORTED_MODULE_1__["default"])().post('/auth/check-token', form);
+  },
+  verifyEmail: function verifyEmail(form) {
+    return Object(_Api__WEBPACK_IMPORTED_MODULE_1__["default"])().get('/auth/email-verification', {
+      params: form
+    });
   }
 });
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../../node_modules/process/browser.js */ "./node_modules/process/browser.js")))
@@ -72401,6 +72533,75 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/Login/VerifyEmail.vue":
+/*!*******************************************************!*\
+  !*** ./resources/js/components/Login/VerifyEmail.vue ***!
+  \*******************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _VerifyEmail_vue_vue_type_template_id_7f776b82___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./VerifyEmail.vue?vue&type=template&id=7f776b82& */ "./resources/js/components/Login/VerifyEmail.vue?vue&type=template&id=7f776b82&");
+/* harmony import */ var _VerifyEmail_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./VerifyEmail.vue?vue&type=script&lang=js& */ "./resources/js/components/Login/VerifyEmail.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _VerifyEmail_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _VerifyEmail_vue_vue_type_template_id_7f776b82___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _VerifyEmail_vue_vue_type_template_id_7f776b82___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/Login/VerifyEmail.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/Login/VerifyEmail.vue?vue&type=script&lang=js&":
+/*!********************************************************************************!*\
+  !*** ./resources/js/components/Login/VerifyEmail.vue?vue&type=script&lang=js& ***!
+  \********************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_VerifyEmail_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./VerifyEmail.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Login/VerifyEmail.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_VerifyEmail_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/Login/VerifyEmail.vue?vue&type=template&id=7f776b82&":
+/*!**************************************************************************************!*\
+  !*** ./resources/js/components/Login/VerifyEmail.vue?vue&type=template&id=7f776b82& ***!
+  \**************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_VerifyEmail_vue_vue_type_template_id_7f776b82___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./VerifyEmail.vue?vue&type=template&id=7f776b82& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Login/VerifyEmail.vue?vue&type=template&id=7f776b82&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_VerifyEmail_vue_vue_type_template_id_7f776b82___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_VerifyEmail_vue_vue_type_template_id_7f776b82___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/js/components/Main.vue":
 /*!******************************************!*\
   !*** ./resources/js/components/Main.vue ***!
@@ -72764,7 +72965,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_Login_LoginProvider_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/Login/LoginProvider.vue */ "./resources/js/components/Login/LoginProvider.vue");
 /* harmony import */ var _components_Login_ForgotPassword_vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/Login/ForgotPassword.vue */ "./resources/js/components/Login/ForgotPassword.vue");
 /* harmony import */ var _components_Login_ResetPassword_vue__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/Login/ResetPassword.vue */ "./resources/js/components/Login/ResetPassword.vue");
-/* harmony import */ var _store_index__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./store/index */ "./resources/js/store/index.js");
+/* harmony import */ var _components_Login_VerifyEmail_vue__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/Login/VerifyEmail.vue */ "./resources/js/components/Login/VerifyEmail.vue");
+/* harmony import */ var _store_index__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./store/index */ "./resources/js/store/index.js");
+
 
 
 
@@ -72814,6 +73017,10 @@ var routes = [{
   path: '/reset-password',
   component: _components_Login_ResetPassword_vue__WEBPACK_IMPORTED_MODULE_7__["default"],
   beforeEnter: haveToken
+}, {
+  path: '/verify-email',
+  component: _components_Login_VerifyEmail_vue__WEBPACK_IMPORTED_MODULE_8__["default"],
+  beforeEnter: redirectIfLoggedIn
 }];
 
 /***/ }),
@@ -73107,11 +73314,9 @@ var userstore = {
                 commit = _ref3.commit;
                 _context3.next = 3;
                 return _Helpers_User__WEBPACK_IMPORTED_MODULE_1__["default"].signup(form).then(function (response) {
-                  localStorage.setItem('token', response.data.access_token);
-                  commit('auth_success', response.data.user);
                   return {
                     'success': true,
-                    'message': 'Successfully signed up!'
+                    'message': response.data.message
                   };
                 })["catch"](function (error) {
                   localStorage.removeItem('token');
@@ -73200,7 +73405,7 @@ var userstore = {
                 })["catch"](function (err) {
                   return {
                     'success': false,
-                    'message': response.data.message
+                    'message': err.data.message
                   };
                 });
 
@@ -73232,7 +73437,7 @@ var userstore = {
                 })["catch"](function (err) {
                   return {
                     'success': false,
-                    'message': response.data.message
+                    'message': err.data.message
                   };
                 });
 
@@ -73256,7 +73461,13 @@ var userstore = {
               case 0:
                 commit = _ref8.commit;
                 _context7.next = 3;
-                return _Helpers_User__WEBPACK_IMPORTED_MODULE_1__["default"].checkToken(form).then(function (response) {})["catch"](function (err) {});
+                return _Helpers_User__WEBPACK_IMPORTED_MODULE_1__["default"].checkToken(form).then(function (response) {
+                  return true;
+                })["catch"](function (err) {
+                  return {
+                    'message': err.data.message
+                  };
+                });
 
               case 3:
                 return _context7.abrupt("return", _context7.sent);
@@ -73267,6 +73478,39 @@ var userstore = {
             }
           }
         }, _callee7);
+      }))();
+    },
+    verifyEmail: function verifyEmail(_ref9, form) {
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee8() {
+        var commit;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee8$(_context8) {
+          while (1) {
+            switch (_context8.prev = _context8.next) {
+              case 0:
+                commit = _ref9.commit;
+                console.log(form);
+                _context8.next = 4;
+                return _Helpers_User__WEBPACK_IMPORTED_MODULE_1__["default"].verifyEmail(form).then(function (response) {
+                  return {
+                    'message': response.data.message,
+                    'success': true
+                  };
+                })["catch"](function (err) {
+                  return {
+                    'message': err.data.message,
+                    'success': false
+                  };
+                });
+
+              case 4:
+                return _context8.abrupt("return", _context8.sent);
+
+              case 5:
+              case "end":
+                return _context8.stop();
+            }
+          }
+        }, _callee8);
       }))();
     }
   },

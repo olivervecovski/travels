@@ -53,9 +53,7 @@ const userstore = {
     async signup({commit}, form) {
       return await User.signup(form)
       .then(response => {
-        localStorage.setItem('token', response.data.access_token);
-        commit('auth_success', response.data.user);
-        return {'success': true, 'message': 'Successfully signed up!'};
+        return {'success': true, 'message': response.data.message};
       })
       .catch(error => {
         localStorage.removeItem('token');
@@ -95,7 +93,7 @@ const userstore = {
         return {'success': true, 'message': response.data.message};
       })
       .catch(err => {
-        return {'success': false, 'message': response.data.message};
+        return {'success': false, 'message': err.data.message};
       })
     },
     async resetPassword({commit}, form) {
@@ -104,17 +102,27 @@ const userstore = {
         return {'success': true, 'message': response.data.message};
       })
       .catch(err => {
-        return {'success': false, 'message': response.data.message};
+        return {'success': false, 'message': err.data.message};
       })
     },
     async checkPasswordToken({commit}, form) {
       return await User.checkToken(form)
       .then(response => {
-        
+        return true;
       })
       .catch(err => {
-
+        return {'message': err.data.message}
       });
+    },
+    async verifyEmail({commit}, form) {
+      console.log(form)
+      return await User.verifyEmail(form)
+      .then(response => {
+        return {'message': response.data.message, 'success': true};
+      })
+      .catch(err => {
+        return {'message': err.data.message, 'success': false};
+      })
     }
   },
   modules: {},
