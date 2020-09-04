@@ -113,7 +113,6 @@ class AuthController extends Controller
     public function checkToken(CheckTokenRequest $request) 
     {
         $pw_reset = DB::table('password_resets')->where('email', '=', $request->email)->first();
-        dd($pw_reset);
         $msg = '';
         $status = 200;
         $email = '';

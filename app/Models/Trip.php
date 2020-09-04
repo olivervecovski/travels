@@ -5,15 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
+use App\User;
 
 class Trip extends Model
 {
     protected static function boot() {
         parent::boot();
     
-        // static::creating(function($trip) {
-        //   $trip->user_id = Auth::id();
-        // });
+        static::creating(function($trip) {
+          $trip->user_id = Auth::id();
+        });
     }
 
     protected $morphClass = 'App\Models\Trip';
