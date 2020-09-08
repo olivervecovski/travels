@@ -73074,10 +73074,13 @@ vue__WEBPACK_IMPORTED_MODULE_1___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_2__
                 return dispatch('authUser');
 
               case 3:
-                // await dispatch('getTrips');
+                _context.next = 5;
+                return dispatch('getTrips');
+
+              case 5:
                 commit('setloaded', true);
 
-              case 4:
+              case 6:
               case "end":
                 return _context.stop();
             }
