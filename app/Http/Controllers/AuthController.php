@@ -79,6 +79,10 @@ class AuthController extends Controller
     public function handleProviderCallback($provider) {
         $user = Socialite::driver($provider)->stateless()->user();
 
+        if($user->avatar == 'https://lh6.googleusercontent.com/-mlR5G5lkMew/AAAAAAAAAAI/AAAAAAAAAAA/XS8AdiNymE0/photo.jpg') {
+            $user->avatar = '';
+        }
+
 
         if(!$user->token) {
             return response()->json([
@@ -94,12 +98,16 @@ class AuthController extends Controller
             $appUser = User::create([
                 'name' => $user->name,
                 'email' => $user->email,
-                'password' => Str::random(10)
+                'password' => Str::random(10),
+                'provider_image' => $user->avatar
             ]);
 
             $this->createSocialAccount($appUser, $user->id, $provider);
 
         } else {
+            $appUser = $user->name;
+            $appUser->provider_image = $user->avatar;
+            $appUser->save();
             // user already exists
             $this->createSocialAccount($appUser, $user->id, $provider);
         }

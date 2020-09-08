@@ -73369,6 +73369,14 @@ var userstore = {
                 commit = _ref5.commit;
                 _context4.next = 3;
                 return _Helpers_User__WEBPACK_IMPORTED_MODULE_1__["default"].providerCallback(payload.provider, payload.query).then(function (response) {
+                  if (!response.data.access_token) {
+                    commit('auth_error');
+                    return {
+                      'success': false,
+                      'message': 'Something went wrong'
+                    };
+                  }
+
                   localStorage.setItem('token', response.data.access_token);
                   commit('auth_success', response.data.user);
                   return {

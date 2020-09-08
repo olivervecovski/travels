@@ -22,9 +22,11 @@ trait HasAvatar {
      */
     public function getAvatarAttribute()
     {
-      if($this->hasAvatar) {
-        return 'hej';
-      } 
+      if($this->image && $this->image !== '') {
+        return $this->image;
+      } else if($this->provider_image && $this->provider_image !== '') {
+        return $this->provider_image;
+      }
 
       return $this->get_gravatar();
     }
