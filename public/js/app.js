@@ -15367,7 +15367,6 @@ __webpack_require__.r(__webpack_exports__);
   created: function created() {
     var _this = this;
 
-    return;
     this.$store.dispatch('loginWithProvider', {
       'provider': this.$route.params.provider,
       'query': this.$route.query
@@ -54901,7 +54900,7 @@ var render = function() {
                 staticClass: "mr-4",
                 attrs: { icon: ["fab", "google"] }
               }),
-              _vm._v("Sign in with Google")
+              _vm._v("Sign up with Google")
             ],
             1
           )
@@ -73075,13 +73074,10 @@ vue__WEBPACK_IMPORTED_MODULE_1___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_2__
                 return dispatch('authUser');
 
               case 3:
-                _context.next = 5;
-                return dispatch('getTrips');
-
-              case 5:
+                // await dispatch('getTrips');
                 commit('setloaded', true);
 
-              case 6:
+              case 4:
               case "end":
                 return _context.stop();
             }

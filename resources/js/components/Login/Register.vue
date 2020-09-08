@@ -27,7 +27,7 @@
             <SyncLoader :color="'#60b0f196'" v-else/>
           </button>
           <h5 class="line-word my-4"><span>OR</span></h5>
-          <button class="btn btn-block mb-4 btn-google" @click="signup('google')"><fa class="mr-4" :icon="['fab', 'google']"></fa>Sign in with Google</button>
+          <button class="btn btn-block mb-4 btn-google" @click="signup('google')"><fa class="mr-4" :icon="['fab', 'google']"></fa>Sign up with Google</button>
         </div>
       </div>
     </div>

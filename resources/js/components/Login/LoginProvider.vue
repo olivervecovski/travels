@@ -20,7 +20,6 @@ export default {
     SyncLoader,
   },
   created () {
-    return;
     this.$store.dispatch('loginWithProvider', {'provider': this.$route.params.provider, 'query': this.$route.query})
     .then(response => {
       if(response.success) {
