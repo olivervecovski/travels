@@ -25,7 +25,8 @@ const userstore = {
     async authUser({commit}){
       await User.auth()
       .then(response =>{
-        if(response) commit('auth_success', response);
+        console.log(response.data)
+        if(response) commit('auth_success', response.data);
         else commit('logout');
       })
       .catch(err => {
@@ -46,7 +47,7 @@ const userstore = {
       .catch(error => {
         commit('auth_error');
         localStorage.removeItem('token');
-        return {'success': false, 'message': 'The provided credentials are incorrect!'};
+        return {'success': false, 'message': error.response.data.message};
       });
     },
 

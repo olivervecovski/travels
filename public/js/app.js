@@ -15626,7 +15626,7 @@ __webpack_require__.r(__webpack_exports__);
     var _this2 = this;
 
     var beforeForm = {
-      token: this.$route.query.email
+      email: this.$route.query.email
     };
     this.$store.dispatch('checkPasswordToken', beforeForm).then(function (res) {
       _this2.beforeLoad = false;
@@ -15786,6 +15786,7 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Helpers_User__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../Helpers/User */ "./resources/js/Helpers/User.js");
+//
 //
 //
 //
@@ -55297,6 +55298,13 @@ var render = function() {
                           }
                         },
                         [
+                          _c("img", {
+                            staticClass: "avatar-small rounded-circle mr-1",
+                            attrs: {
+                              src: _vm.$store.getters.user.avatar,
+                              alt: ""
+                            }
+                          }),
                           _vm._v(
                             "\n            " +
                               _vm._s(_vm.$store.getters.user.name) +
@@ -73253,7 +73261,8 @@ var userstore = {
                 commit = _ref.commit;
                 _context.next = 3;
                 return _Helpers_User__WEBPACK_IMPORTED_MODULE_1__["default"].auth().then(function (response) {
-                  if (response) commit('auth_success', response);else commit('logout');
+                  console.log(response.data);
+                  if (response) commit('auth_success', response.data);else commit('logout');
                 })["catch"](function (err) {
                   commit('logout');
                 });
@@ -73289,7 +73298,7 @@ var userstore = {
                   localStorage.removeItem('token');
                   return {
                     'success': false,
-                    'message': 'The provided credentials are incorrect!'
+                    'message': error.response.data.message
                   };
                 });
 

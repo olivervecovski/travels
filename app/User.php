@@ -6,14 +6,16 @@ use App\Models\Social_Account;
 use App\Models\Trip;
 use App\Notifications\ResetPasswordNotification;
 use App\Notifications\VerifyNotification;
+use App\Traits\HasAvatar;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Log;
 use Laravel\Passport\HasApiTokens;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
-    use HasApiTokens, Notifiable;
+    use HasApiTokens, Notifiable, HasAvatar;
 
     /**
      * The attributes that are mass assignable.
@@ -44,6 +46,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function setPasswordAttribute($value) {
         $this->attributes['password'] = bcrypt($value);
+        Log::info('ATTRIBUTE: ' . $this->attributes['password'] . ' VALUE: ' . $value);
     }
 
     public function trips() {
@@ -63,4 +66,5 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         $this->notify(new VerifyNotification());
     }
+
 }

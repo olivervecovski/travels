@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Resources\UserResource;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -15,7 +16,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::middleware('auth:api')->get('/auth/user', function (Request $request) {
-    return $request->user();
+    $userResource = new UserResource($request->user());
+    return $userResource;
 });
 
 Route::middleware('auth:api')->get('/user/trips', 'TripController@trips');

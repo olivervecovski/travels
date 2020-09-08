@@ -77,9 +77,8 @@ export default {
   },
   beforeCreate () {
     let beforeForm = {
-      token: this.$route.query.email
+      email: this.$route.query.email
     }
-    
     this.$store.dispatch('checkPasswordToken', beforeForm)
     .then(res => {
       this.beforeLoad = false;

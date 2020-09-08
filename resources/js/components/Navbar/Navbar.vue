@@ -19,6 +19,7 @@
           
           <li class="nav-item dropdown" v-if="$store.getters.isLoggedIn">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <img :src="$store.getters.user.avatar" alt="" class="avatar-small rounded-circle mr-1">
               {{ $store.getters.user.name }}
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">

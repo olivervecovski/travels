@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CheckTokenRequest;
 use App\Http\Requests\SignupRequest;
+use App\Http\Resources\UserResource;
 use App\Models\Social_Account;
 use App\User;
 use Carbon\Carbon;
@@ -19,7 +20,6 @@ class AuthController extends Controller
 {
     public function login(Request $request) {
         $user = User::where('email', $request->email)->first();
-
         if(!$user || !Hash::check($request->password, $user->password)) {
             return response()->json([
                 'message' => 'The provided credentials are incorrect'
@@ -153,7 +153,7 @@ class AuthController extends Controller
         return response()->json([
             'access_token' => $token,
             'token_type' => 'bearer',
-            'user' => $user
+            'user' => new UserResource($user)
         ], 200);
     }
 }

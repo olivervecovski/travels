@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ResetPasswordRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Str;
 
@@ -99,10 +100,13 @@ class ResetPasswordController extends Controller
     {
         $this->setUserPassword($user, $password);
 
+        Log::debug('PASSWORD : ' .$password);
+
         $user->setRememberToken(Str::random(60));
 
         $user->save();
 
+        Log::debug('USER: ' .$user );
         // event(new PasswordReset($user));
     }
 
