@@ -105,7 +105,6 @@ class AuthController extends Controller
             $this->createSocialAccount($appUser, $user->id, $provider);
 
         } else {
-            $appUser = $user->name;
             $appUser->provider_image = $user->avatar;
             $appUser->save();
             // user already exists
