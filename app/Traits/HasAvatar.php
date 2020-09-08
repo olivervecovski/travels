@@ -39,7 +39,7 @@ trait HasAvatar {
           $uri = 'http://www.gravatar.com/avatar/' . md5(strtolower(Str::random(12)));
         }
       } catch(Exception $e) {
-        $uri = 'http://www.gravatar.com/avatar/' . md5(strtolower(Str::random(12)));
+        $uri = 'http://www.gravatar.com/avatar/' . md5(strtolower(Str::random(12))) . '?d=identicon';
       }
       
 

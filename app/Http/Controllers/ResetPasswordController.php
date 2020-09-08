@@ -100,13 +100,9 @@ class ResetPasswordController extends Controller
     {
         $this->setUserPassword($user, $password);
 
-        Log::debug('PASSWORD : ' .$password);
-
         $user->setRememberToken(Str::random(60));
 
         $user->save();
-
-        Log::debug('USER: ' .$user );
         // event(new PasswordReset($user));
     }
 
