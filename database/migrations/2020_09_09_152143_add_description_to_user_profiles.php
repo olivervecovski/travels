@@ -14,7 +14,7 @@ class AddDescriptionToUserProfiles extends Migration
     public function up()
     {
         Schema::table('user_profiles', function (Blueprint $table) {
-            $table->text('description');
+            $table->text('description')->nullable();
         });
     }
 
