@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class User_profile extends Model
 {
-    protected $fillable = ['image'];
+    protected $fillable = ['image', 'provider_image', 'description'];
 }

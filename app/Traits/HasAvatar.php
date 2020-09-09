@@ -22,7 +22,7 @@ trait HasAvatar {
      */
     public function getAvatarAttribute()
     {
-      if($this->user_profile->image && $this->user_profile_image !== '') {
+      if($this->user_profile->image && $this->user_profile->image !== '') {
         return $this->user_profile->image;
       } else if($this->user_profile->provider_image && $this->user_profile->provider_image !== '') {
         return $this->user_profile->provider_image;
