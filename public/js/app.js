@@ -55357,12 +55357,15 @@ var render = function() {
                         },
                         [
                           _c(
-                            "a",
+                            "router-link",
                             {
                               staticClass: "dropdown-item",
-                              attrs: { href: "#" }
+                              attrs: {
+                                to:
+                                  "/user-profile/" + _vm.$store.getters.user.id
+                              }
                             },
-                            [_vm._v("My profile")]
+                            [_vm._v("My profiles")]
                           ),
                           _vm._v(" "),
                           _c(
@@ -55389,7 +55392,8 @@ var render = function() {
                             },
                             [_vm._v("Log out")]
                           )
-                        ]
+                        ],
+                        1
                       )
                     ])
                   : _vm._e()

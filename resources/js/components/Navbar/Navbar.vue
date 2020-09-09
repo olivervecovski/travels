@@ -23,7 +23,7 @@
               {{ $store.getters.user.name }}
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="#">My profile</a>
+              <router-link class="dropdown-item" :to="'/user-profile/' + $store.getters.user.id">My profiles</router-link>
               <a class="dropdown-item" href="#">My trips</a>
               <div class="dropdown-divider"></div>
               <a class="dropdown-item" href="#" @click="logout()" >Log out</a>
