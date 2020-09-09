@@ -9,13 +9,13 @@ use App\User;
 
 class Trip extends Model
 {
-    protected static function boot() {
-        parent::boot();
+    // protected static function boot() {
+    //     parent::boot();
     
-        static::creating(function($trip) {
-          $trip->user_id = Auth::id();
-        });
-    }
+    //     static::creating(function($trip) {
+    //       $trip->user_id = Auth::id();
+    //     });
+    // }
 
     protected $morphClass = 'App\Models\Trip';
 
