@@ -53,6 +53,6 @@ export default {
     });
   },
   getProfile(id) {
-    return Api().get(`/users/${id}/`);
+    return Api().get(`/users/${id}`);
   }
 }

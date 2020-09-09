@@ -72072,7 +72072,7 @@ var api_base = process.env.VUE_APP_API_BASE;
     });
   },
   getProfile: function getProfile(id) {
-    return Object(_Api__WEBPACK_IMPORTED_MODULE_1__["default"])().get("/users/".concat(id, "/"));
+    return Object(_Api__WEBPACK_IMPORTED_MODULE_1__["default"])().get("/users/".concat(id));
   }
 });
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../../node_modules/process/browser.js */ "./node_modules/process/browser.js")))
