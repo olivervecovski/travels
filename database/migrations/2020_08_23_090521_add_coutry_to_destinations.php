@@ -14,7 +14,7 @@ class AddCoutryToDestinations extends Migration
     public function up()
     {
         Schema::table('destinations', function (Blueprint $table) {
-            $table->string('country');
+            $table->string('country')->nullable();
         });
     }
 
