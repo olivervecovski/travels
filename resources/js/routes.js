@@ -7,6 +7,7 @@ import LoginProvider from './components/Login/LoginProvider.vue';
 import ForgotPassword from './components/Login/ForgotPassword.vue';
 import ResetPassword from './components/Login/ResetPassword.vue';
 import VerifyEmail from './components/Login/VerifyEmail.vue';
+import ViewProfile from './components/User/View_profile.vue';
 import store from './store/index';
 
 function redirectIfLoggedIn(to, from, next) {
@@ -15,6 +16,13 @@ function redirectIfLoggedIn(to, from, next) {
     } else {
         next('/');
     }
+}
+
+function redirectIfNotLoggedIn(to, from, next) {
+    if(localStorage.getItem('token'))
+        next()
+    else
+        next('/')
 }
 
 function haveToken(to, from, next) {
@@ -57,6 +65,11 @@ export const routes = [
         path: '/verify-email',
         component: VerifyEmail,
         beforeEnter: redirectIfLoggedIn
+    },
+    {
+        path: '/user-profile/:id',
+        component: ViewProfile,
+        beforeEnter: redirectIfNotLoggedIn
     }
     
     

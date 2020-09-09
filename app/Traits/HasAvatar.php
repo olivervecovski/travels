@@ -22,10 +22,10 @@ trait HasAvatar {
      */
     public function getAvatarAttribute()
     {
-      if($this->image && $this->image !== '') {
-        return $this->image;
-      } else if($this->provider_image && $this->provider_image !== '') {
-        return $this->provider_image;
+      if($this->user_profile->image && $this->user_profile_image !== '') {
+        return $this->user_profile->image;
+      } else if($this->user_profile->provider_image && $this->user_profile->provider_image !== '') {
+        return $this->user_profile->provider_image;
       }
 
       return $this->get_gravatar();
@@ -38,10 +38,10 @@ trait HasAvatar {
       try {
         $res = $client->request('GET', $uri . '?d=404');
         if ($res->getStatusCode() != 200) {
-          $uri = 'http://www.gravatar.com/avatar/' . md5(strtolower(Str::random(12)));
+          $uri = 'http://www.gravatar.com/avatar/' . md5(strtolower($this->email)) . '?d=identicon';
         }
       } catch(Exception $e) {
-        $uri = 'http://www.gravatar.com/avatar/' . md5(strtolower(Str::random(12))) . '?d=identicon';
+        $uri = 'http://www.gravatar.com/avatar/' . md5(strtolower($this->email)) . '?d=identicon';
       }
       
 

@@ -25,7 +25,6 @@ const userstore = {
     async authUser({commit}){
       await User.auth()
       .then(response =>{
-        console.log(response.data)
         if(response) commit('auth_success', response.data);
         else commit('logout');
       })
@@ -59,7 +58,6 @@ const userstore = {
       .catch(error => {
         localStorage.removeItem('token');
         commit('auth_error');
-        console.log(error.response.data)
         return {'success': false, 'message': error.response.data.message, 'errors': error.response.data.errors};
       })
     },
@@ -94,7 +92,6 @@ const userstore = {
     async forgotPassword({commit}, form) {
       return await User.forgotPassword(form)
       .then(response => {
-        console.log(response);
         return {'success': true, 'message': response.data.message};
       })
       .catch(err => {
@@ -120,13 +117,12 @@ const userstore = {
       });
     },
     async verifyEmail({commit}, form) {
-      console.log(form)
       return await User.verifyEmail(form)
       .then(response => {
         return {'message': response.data.message, 'success': true};
       })
       .catch(err => {
-        return {'message': err.data.message, 'success': false};
+        return {'message': err.response.data.message, 'success': false};
       })
     }
   },

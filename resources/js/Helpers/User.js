@@ -51,5 +51,8 @@ export default {
     return Api().get('/auth/email-verification', {
       params: form
     });
+  },
+  getProfile(id) {
+    return Api().get(`/users/${id}/`);
   }
 }

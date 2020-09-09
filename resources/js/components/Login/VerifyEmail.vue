@@ -33,7 +33,7 @@ export default {
               }
             },
           })
-          this.$router.push('/login')
+          this.$router.push('/signin')
         } else {
           this.$toasted.error(res.message, {
             icon: 'fa-times',
@@ -45,7 +45,7 @@ export default {
               }
             },
           })
-          this.$router.push('/')
+          this.$router.push('/signin')
         }
       });
   },

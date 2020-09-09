@@ -8,14 +8,13 @@ const userstore = {
   },
   actions: {
 
-    async getUserProfile({commit}){
-      await User.auth()
+    async getUserProfile({commit}, id){
+      return await User.getProfile(id)
       .then(response =>{
-        console.log(response.data)
-        if(response) commit('auth_success', response.data);
-        else commit('logout');
+        return response.data.user_profile;
       })
       .catch(err => {
+        return err.response.data.message;
       });
     },
   },

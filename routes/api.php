@@ -20,6 +20,8 @@ Route::middleware('auth:api')->get('/auth/user', function (Request $request) {
     return $userResource;
 });
 
+Route::apiResource('/users', 'UserController');
+
 Route::middleware('auth:api')->get('/user/trips', 'TripController@trips');
 
 Route::apiResource('/trips', 'TripController');

@@ -46,6 +46,7 @@ class AuthController extends Controller
             ], 403);
          }
          $user = User::create($request->all());
+         $user->user_profile()->create(['user_id' => $user->id]);
 
         $user->sendEmailVerificationNotification();
 
@@ -101,12 +102,12 @@ class AuthController extends Controller
                 'password' => Str::random(10),
                 'provider_image' => $user->avatar
             ]);
+            
+            $appUser->user_profile()->create(['user_id' => $appUser->id, 'provider_image' => $user->avatar]);
 
             $this->createSocialAccount($appUser, $user->id, $provider);
 
         } else {
-            $appUser->provider_image = $user->avatar;
-            $appUser->save();
             // user already exists
             $this->createSocialAccount($appUser, $user->id, $provider);
         }
@@ -160,7 +161,8 @@ class AuthController extends Controller
         return response()->json([
             'access_token' => $token,
             'token_type' => 'bearer',
-            'user' => new UserResource($user)
+            'user' => new UserResource($user),
+            'user_profile' => $user->user_profile
         ], 200);
     }
 }

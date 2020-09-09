@@ -4,6 +4,7 @@ namespace App;
 
 use App\Models\Social_Account;
 use App\Models\Trip;
+use App\Models\User_profile;
 use App\Notifications\ResetPasswordNotification;
 use App\Notifications\VerifyNotification;
 use App\Traits\HasAvatar;
@@ -54,6 +55,10 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function social_accounts() {
         return $this->hasMany(Social_Account::class);
+    }
+
+    public function user_profile() {
+        return $this->hasOne(User_profile::class);
     }
 
     public function sendPasswordResetNotification($token)
