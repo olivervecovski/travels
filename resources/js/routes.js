@@ -67,7 +67,7 @@ export const routes = [
         beforeEnter: redirectIfLoggedIn
     },
     {
-        path: '/user-profile/:id',
+        path: '/profile/:id',
         component: ViewProfile,
         beforeEnter: redirectIfNotLoggedIn
     }

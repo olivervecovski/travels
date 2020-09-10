@@ -119,14 +119,6 @@ class TripController extends Controller
         
     }
 
-    public function trips() {
-        $trips = auth()->user()->trips;
-        return response()->json([
-            'count' => count($trips),
-            'trips' => TripResource::collection($trips)
-        ]);
-    }
-
     private function tripResponse(Trip $trip, $message, $status_code) {
         return response()->json([
             'success' => true,

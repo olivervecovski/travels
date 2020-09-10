@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\TripResource;
 use App\Http\Resources\UserProfileResource;
 use App\User;
 use Illuminate\Http\Request;
@@ -63,5 +64,11 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         //
+    }
+
+    public function user_trips(User $user) {
+        return response()->json([
+            'trips' => TripResource::collection($user->trips)
+        ], 200);
     }
 }

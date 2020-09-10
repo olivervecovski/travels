@@ -15918,13 +15918,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+  props: {
+    trips: {}
+  },
   components: {
     Trip: _Trip__WEBPACK_IMPORTED_MODULE_0__["default"]
-  },
-  computed: {
-    trips: function trips() {
-      return this.$store.getters.trips;
-    }
   }
 });
 
@@ -15939,6 +15937,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Trips_TripList__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Trips/TripList */ "./resources/js/components/Trips/TripList.vue");
 //
 //
 //
@@ -15952,10 +15951,22 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
+  components: {
+    triplist: _Trips_TripList__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
   data: function data() {
     return {
-      user: {}
+      user: {},
+      trips: {}
     };
   },
   beforeCreate: function beforeCreate() {
@@ -15963,6 +15974,7 @@ __webpack_require__.r(__webpack_exports__);
 
     this.$store.dispatch('getUserProfile', this.$route.params.id).then(function (response) {
       _this.user = response;
+      console.log(_this.user);
     })["catch"](function (err) {});
   }
 });
@@ -54436,7 +54448,12 @@ var render = function() {
     _c("div", { staticClass: "row  row-space-3" }, [
       _c("div", { staticClass: "col-md-3" }, [_c("Sidebar")], 1),
       _vm._v(" "),
-      _c("div", { staticClass: "col-md-6" }, [_c("TripList")], 1)
+      _c(
+        "div",
+        { staticClass: "col-md-6" },
+        [_c("TripList", { attrs: { trips: _vm.$store.getters.trips } })],
+        1
+      )
     ])
   ])
 }
@@ -55246,7 +55263,7 @@ var render = function() {
   return _c(
     "nav",
     {
-      staticClass: "navbar navbar-expand-lg navbar-dark bg-dark",
+      staticClass: "navbar navbar-expand-lg navbar-dark bg-dark mb-4",
       attrs: { id: "nav-bar" }
     },
     [
@@ -55361,11 +55378,10 @@ var render = function() {
                             {
                               staticClass: "dropdown-item",
                               attrs: {
-                                to:
-                                  "/user-profile/" + _vm.$store.getters.user.id
+                                to: "/profile/" + _vm.$store.getters.user.id
                               }
                             },
-                            [_vm._v("My profiles")]
+                            [_vm._v("My profile")]
                           ),
                           _vm._v(" "),
                           _c(
@@ -55588,17 +55604,30 @@ var render = function() {
     _c("div", { staticClass: "col-md-3" }, [
       _c("div", { staticClass: "center" }, [
         _c("img", {
-          staticClass: "avatar-full",
+          staticClass: "avatar-full rounded-circle",
           attrs: { src: _vm.user.avatar, alt: "" }
         })
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "card" }, [
-        _c("div", { staticClass: "card-header text-center" }, [
+      _c("div", { staticClass: "center" }, [
+        _c("div", { staticClass: "text-center my-2" }, [
           _vm._v(_vm._s(_vm.user.name))
         ])
-      ])
-    ])
+      ]),
+      _vm._v(" "),
+      _vm.user.id == _vm.$store.getters.user.id
+        ? _c("button", { staticClass: "btn btn-block btn-default" }, [
+            _vm._v("Edit profile")
+          ])
+        : _vm._e()
+    ]),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "col-md-6" },
+      [_c("triplist", { attrs: { trips: _vm.user.trips } })],
+      1
+    )
   ])
 }
 var staticRenderFns = []
@@ -73187,7 +73216,7 @@ var routes = [{
   component: _components_Login_VerifyEmail_vue__WEBPACK_IMPORTED_MODULE_8__["default"],
   beforeEnter: redirectIfLoggedIn
 }, {
-  path: '/user-profile/:id',
+  path: '/profile/:id',
   component: _components_User_View_profile_vue__WEBPACK_IMPORTED_MODULE_9__["default"],
   beforeEnter: redirectIfNotLoggedIn
 }];

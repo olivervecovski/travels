@@ -63,9 +63,8 @@ body {
   height: 2rem;
 }
 
-.btn {
-  font-size: 20px;
-  height: 3.5rem; 
+.btn:focus{
+  outline: none !important;
 }
 
 .btn-form {
@@ -85,6 +84,12 @@ body {
 
 .btn-google:hover .fa-google {
   color: #fff;
+}
+
+.btn-default {
+  height: 1.8rem;
+  border: 1px solid #ddd;
+  line-height: 20px;
 }
 
 .loading-page {

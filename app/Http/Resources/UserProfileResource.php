@@ -20,7 +20,8 @@ class UserProfileResource extends JsonResource
             'email' => $this->email,
             'avatar' => $this->avatar,
             'image' => $this->user_profile->image,
-            'description' => $this->user_profile->description
+            'description' => $this->user_profile->description,
+            'trips' => $this->trips
         ];
     }
 }

@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="nav-bar">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4" id="nav-bar">
     <div class="container">
       <router-link to='/' class="navbar-brands">
         <img src="../../../images/travelslogo.png" alt="" class="navbar-logo">
@@ -23,7 +23,7 @@
               {{ $store.getters.user.name }}
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <router-link class="dropdown-item" :to="'/user-profile/' + $store.getters.user.id">My profiles</router-link>
+              <router-link class="dropdown-item" :to="'/profile/' + $store.getters.user.id">My profile</router-link>
               <a class="dropdown-item" href="#">My trips</a>
               <div class="dropdown-divider"></div>
               <a class="dropdown-item" href="#" @click="logout()" >Log out</a>

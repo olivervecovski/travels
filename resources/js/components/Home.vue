@@ -6,7 +6,7 @@
     </div>
 
     <div class="col-md-6">
-      <TripList></TripList>
+      <TripList :trips="$store.getters.trips" />
     </div>
   </div>
   

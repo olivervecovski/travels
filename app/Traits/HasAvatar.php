@@ -34,14 +34,14 @@ trait HasAvatar {
     private function get_gravatar() {
       $hash = md5(strtolower(trim($this->attributes[$this->gravatarEmail])));
       $client = new Client();
-      $uri = 'http://www.gravatar.com/avatar/' . $hash;
+      $uri = 'http://www.gravatar.com/avatar/' . $hash . '?s=300';
       try {
         $res = $client->request('GET', $uri . '?d=404');
         if ($res->getStatusCode() != 200) {
-          $uri = 'http://www.gravatar.com/avatar/' . md5(strtolower($this->email)) . '?d=identicon';
+          $uri = 'http://www.gravatar.com/avatar/' . md5(strtolower($this->email)) . '?d=identicon&s=200';
         }
       } catch(Exception $e) {
-        $uri = 'http://www.gravatar.com/avatar/' . md5(strtolower($this->email)) . '?d=identicon';
+        $uri = 'http://www.gravatar.com/avatar/' . md5(strtolower($this->email)) . '?d=identicon&s=200';
       }
       
 

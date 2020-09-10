@@ -7,13 +7,11 @@
 <script>
 import Trip from './Trip';
 export default {
+  props: {
+    trips: {},
+  },
   components: {
     Trip,
-  },
-  computed: {
-    trips() {
-      return this.$store.getters.trips;
-    }
   },
 }
 </script>
