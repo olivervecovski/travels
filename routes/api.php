@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Resources\UserProfileResource;
 use App\Http\Resources\UserResource;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -16,13 +17,18 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::middleware('auth:api')->get('/auth/user', function (Request $request) {
-    $userResource = new UserResource($request->user());
+    $userResource = new UserProfileResource($request->user());
     return $userResource;
 });
 
-Route::apiResource('/users', 'UserController');
-
-Route::middleware('auth:api')->get('/user/trips', 'TripController@trips');
+Route::group([
+    'middleware' => 'auth:api',
+    'prefix' => 'users'
+], function($router) {
+    Route::get('{id}', 'UserController@show');
+    Route::post('general', 'UserController@update_general');
+    Route::post('password', 'UserController@update_password');
+});
 
 Route::apiResource('/trips', 'TripController');
 Route::apiResource('/trips/{trip}/destinations', 'DestinationController');

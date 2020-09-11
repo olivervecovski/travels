@@ -52,7 +52,12 @@ export default {
       params: form
     });
   },
+
   getProfile(id) {
     return Api().get(`/users/${id}`);
+  },
+
+  editGeneralSettings(form) {
+    return Api().post('/users/general', form);
   }
 }

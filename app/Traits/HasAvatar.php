@@ -38,10 +38,10 @@ trait HasAvatar {
       try {
         $res = $client->request('GET', $uri . '?d=404');
         if ($res->getStatusCode() != 200) {
-          $uri = 'http://www.gravatar.com/avatar/' . md5(strtolower($this->email)) . '?d=identicon&s=200';
+          $uri = 'http://www.gravatar.com/avatar/' . md5(strtolower($this->email)) . '?d=identicon&s=300';
         }
       } catch(Exception $e) {
-        $uri = 'http://www.gravatar.com/avatar/' . md5(strtolower($this->email)) . '?d=identicon&s=200';
+        $uri = 'http://www.gravatar.com/avatar/' . md5(strtolower($this->email)) . '?d=identicon&s=300';
       }
       
 

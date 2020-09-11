@@ -6,38 +6,20 @@ use App\Http\Resources\TripResource;
 use App\Http\Resources\UserProfileResource;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
     /**
      * Display the specified resource.
      *
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function show(User $user)
+    public function show($id)
     {
+        $user = User::findOrFail($id);
+
         return response()->json([
             'user_profile' => new UserProfileResource($user)
         ]);
@@ -50,25 +32,41 @@ class UserController extends Controller
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update_general(Request $request)
     {
-        //
-    }
+        $request->validate([
+            'name' => 'required',
+            'description' => 'required'
+        ]);
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\User  $user
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(User $user)
-    {
-        //
-    }
+        $user = Auth::user();
+        
+        $user->name = $request->name;
+        $user->user_profile->description = $request->description;
 
-    public function user_trips(User $user) {
+        $user->save();
+        $user->user_profile->save();
+
         return response()->json([
-            'trips' => TripResource::collection($user->trips)
+            'user' => new UserProfileResource($user)
         ], 200);
+    }
+
+    public function update_password(Request $request) {
+        $request->validate([
+            'password' => 'required|confirmed'
+        ]);
+
+        $user = Auth::user();
+        $user->password = $request->password;
+        $user->save();
+
+        return response()->json([
+            'user' => new UserProfileResource($user)
+        ]);
+    }
+
+    public function update_image(Request $request) {
+        
     }
 }
