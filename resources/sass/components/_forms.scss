@@ -1,0 +1,38 @@
+input[type="text"], input[type="password"], textarea {
+  line-height: 37px;
+  font-size: 11px;
+  color: $white;
+  padding: 0 12px;
+  border-radius: 4px;
+  border-color: rgba(0,0,0,0.1);
+  border-width: 2px;
+  border-style: solid;
+  background: $darkgray;
+  &:focus{
+    outline: none;
+    border-color: rgba(0,0,0,0.2);
+  }
+}
+
+input[type="text"] {
+}
+
+input[type="password"] {
+}
+
+textarea{
+}
+
+
+.input-danger{
+  border-color: $redopacity !important;
+}
+.text-danger{
+  font-size: 12px;
+  line-height: 1;
+  margin-bottom: 5px;
+  color: $redopacity;
+}
+.custom-file-input{
+  cursor: pointer;
+}

@@ -1,24 +1,11 @@
 <template>
-  <div class="col-md-12">
-    <div class="card">
-      <div class="card-body">
-        <h3>Password</h3>
-
-        <div class="form-group">
-          <input type="password" class="form-control" placeholder="New password" v-model="form.password">
-          <span class="text-danger" v-if="errors.password">{{errors.password[0]}}</span>
-        </div>
-        <div class="form-group">
-          <input type="password" class="form-control" placeholder="Confirm new password" v-model="form.password_confirmation">
-        </div>
-        <div class="form-group">
-          <input type="password" class="form-control" placeholder="Current password" v-model="form.current_password">
-          <span class="text-danger" v-if="errors.current_password">{{errors.current_password[0]}}</span>
-        </div>
-
-        <button class="btn btn-outline-success" @click="edit">Save</button>
-      </div>
-    </div>
+  <div>
+    <input :class="{'input-danger' : errors.current_password}" type="password" placeholder="Current password" v-model="form.current_password">
+    <span class="text-danger" v-if="errors.current_password">{{errors.current_password[0]}}</span>
+    <input :class="{'input-danger' : errors.password}" type="password" placeholder="New password" v-model="form.password">
+    <span class="text-danger" v-if="errors.password">{{errors.password[0]}}</span>
+    <input type="password" placeholder="Confirm new password" v-model="form.password_confirmation">
+    <button class="btn btn-outline-success" @click="edit">Save</button>
   </div>
 </template>
 
@@ -59,7 +46,7 @@ export default {
         } else {
           this.errors.current_password = ['Incorrect password'];
         }
-        
+
         this.$toasted.error(err.message, {
           icon: 'fa-times',
           duration: 5000,

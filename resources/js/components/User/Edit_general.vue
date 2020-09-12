@@ -1,19 +1,8 @@
 <template>
-  <div class="col-md-12 mb-2">
-    <div class="card">
-      
-      <div class="card-body">
-        <h3>General</h3>
-        <div class="form-group">
-          <input type="text" class="form-control" id="name" v-model="form.name">
-        </div>
-        <div class="form-group">
-          <textarea class="form-control" placeholder="Description" rows="3" v-model="form.description"></textarea>
-        </div>
-
-        <button class="btn btn-outline-success" @click="edit">Save</button>
-      </div>
-    </div>
+  <div>
+    <input placeholder="Name" type="text" id="name" v-model="form.name">
+    <textarea placeholder="Description" rows="3" v-model="form.description"></textarea>
+    <!-- <button class="btn btn-outline-success" @click="edit">Save</button> -->
   </div>
 </template>
 

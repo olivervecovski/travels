@@ -1,0 +1,95 @@
+.profile-page{
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  grid-column-gap: 20px;
+  > div {
+    background: $darkgray;
+    border-radius: 10px;
+    padding: 20px;
+    border: 1px solid rgba(0,0,0,0.1);
+    box-shadow: 0 2px 2px rgba(0,0,0,0.05);
+  }
+  .profile-edit{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 20px;
+    span > div {
+      display: grid;
+      grid-gap: 10px;
+      margin-bottom: 10px;
+      &:last-of-type{
+        margin-bottom: 0;
+      }
+    }
+    button{
+      line-height: 30px;
+      height: auto;
+    }
+  }
+}
+
+.profile-edit-image{
+  > div{
+    display: grid;
+    grid-gap: 20px;
+  }
+  .img-box{
+    position: relative;
+    display: block;
+    margin: 0 auto;
+    padding: 20px;
+    width: 100%;
+    text-align: center;
+    box-shadow: inset 0 0 4px rgba(0,0,0,0.1);
+    border-radius: 10px;
+    background: $darkergray;
+    &:hover{
+      .profile-cover{
+        opacity: 1;
+        cursor: pointer;
+      }
+    }
+
+    .profile-cover{
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      background: rgba(0,0,0,0.5);
+      border-radius: 10px;
+      font-size: 30px;
+      border: 3px dashed rgba(255,255,255,0.5);
+      opacity: 0;
+      transition: 0.2s linear all;
+      svg{
+        height: 100%;
+        vertical-align: middle;
+      }
+    }
+    .avatar-full{
+      max-height: 200px;
+      max-width: 100%;
+      width: auto;
+      display: inline-block;
+      margin: 0 auto;
+    }
+  }
+  .custom-file-label{
+    font-size: 11px;
+    margin: 0;
+    height: 44px;
+    padding: 0.775rem 0.75rem;
+    border-color: $green;
+    background: $darkgray;
+    color: $white;
+    &::after{
+      background: $green;
+      color: white;
+      height: 42px;
+      font-size: 0.8rem;
+      padding: 0.675rem 0.75rem;
+      border-radius: 0 2px 2px 0;
+    }
+  }
+}

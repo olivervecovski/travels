@@ -1,20 +1,19 @@
 <template>
-  <div class="col-md-12">
-    <div class="card">
-      <div class="card-body">
-        <h3>Image</h3>
-        <div class="input-group mb-3">
-          <div class="custom-file">
-            <input type="file" class="custom-file-input" id="profile-image" @change="previewImage">
-            <label class="custom-file-label" for="profile-image">Change profile picture</label>
-          </div>
+  <div class="profile-edit-image">
+    <div>
+      <div v-show="imageData && imageData.length > 0" class="img-box">
+        <div class="profile-cover" @click="$refs.fileUpload.click()">
+          <fa icon="images"/>
         </div>
-        <div class="image-preview" v-show="imageData && imageData.length > 0">
-            <img class="avatar-full" :src="imageData"/>
-        </div>
-
-        <button class="btn btn-outline-success" @click="edit">Save</button>
+        <img class="avatar-full" :src="imageData"/>
       </div>
+      <div v-show="!imageData" class="custom-file">
+        <input type="file" class="custom-file-input" id="profile-image" @change="previewImage" ref="fileUpload">
+        <label class="custom-file-label" for="profile-image">
+          {{ imageData ? "Change picture" : "Chose profile picture"}}
+        </label>
+      </div>
+      <!-- <button v-if="imageData" class="btn btn-outline-success" @click="edit">Save</button> -->
     </div>
   </div>
 </template>
@@ -46,7 +45,7 @@ export default {
           },
         })
       })
-      
+
     },
     previewImage(e) {
       const file = e.target.files[0];

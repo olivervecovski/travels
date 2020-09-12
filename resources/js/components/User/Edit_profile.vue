@@ -1,8 +1,15 @@
 <template>
   <div>
-    <editgeneral />
-    <editimage />
-    <editpassword />
+    <h3>Edit profile</h3>
+    <div class="profile-edit">
+      <span>
+        <editgeneral />
+        <editpassword />
+      </span>
+      <span>
+        <editimage />
+      </span>
+    </div>
   </div>
 </template>
 
