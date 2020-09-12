@@ -1,8 +1,9 @@
 <template>
-  <div class="col-md-12">
+  <div class="col-md-12 mb-2">
     <div class="card">
-      <div class="card-header"><h3>General</h3></div>
+      
       <div class="card-body">
+        <h3>General</h3>
         <div class="form-group">
           <input type="text" class="form-control" id="name" v-model="form.name">
         </div>

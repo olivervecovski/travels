@@ -31,6 +31,20 @@ const userstore = {
         console.log(err.response);
       })
     },
+    async edit_profile_image({commit}, form) {
+      console.log(form);
+      return await User.editProfileImage(form)
+      .then(response => {
+        commit('auth_success', response.data.user);
+        return {'message': 'Profile picture changed'}
+      })
+      .catch(err => {
+        console.log(err.response)
+      })
+    },
+    async edit_password({commit}, form) {
+      return await User.editPassword(form);
+    },
     profile_editing({commit}) {
       commit('change_editing')
     }

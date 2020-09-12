@@ -4,6 +4,7 @@ namespace App\Traits;
 
 use Exception;
 use GuzzleHttp\Client;
+use Illuminate\Support\Facades\Storage;
 use Str;
 
 trait HasAvatar {
@@ -22,9 +23,38 @@ trait HasAvatar {
      */
     public function getAvatarAttribute()
     {
-      if($this->user_profile->image && $this->user_profile->image !== '') {
-        return $this->user_profile->image;
-      } else if($this->user_profile->provider_image && $this->user_profile->provider_image !== '') {
+        return $this->get_avatar('avatars/' .$this->user_profile->image_filename);
+    }
+
+    private function get_avatar($path) {
+
+      if(!$this->user_profile->image || $this->user_profile->image === '') {
+        return $this->get_provider_avatar();
+      }
+
+      $disk = Storage::disk('s3');
+
+      if($disk->exists($path)) {
+        $s3_client = $disk->getDriver()->getAdapter()->getClient();
+        $command = $s3_client->getCommand(
+          'GetObject',
+          [
+            'Bucket' => env('AWS_BUCKET'),
+            'Key' => $path,
+            'ResponseContentDisposition' => 'attachment;'
+          ]
+          );
+
+          $request = $s3_client->createPresignedRequest($command, '+5 minutes');
+
+          return (string)$request->getUri();
+      } else {
+        return $this->get_provider_avatar();
+      }
+    }
+
+    private function get_provider_avatar() {
+      if($this->user_profile->provider_image && $this->user_profile->provider_image !== '') {
         return $this->user_profile->provider_image;
       }
 

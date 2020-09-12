@@ -28,6 +28,7 @@ Route::group([
     Route::get('{id}', 'UserController@show');
     Route::post('general', 'UserController@update_general');
     Route::post('password', 'UserController@update_password');
+    Route::post('image', 'UserController@update_image');
 });
 
 Route::apiResource('/trips', 'TripController');

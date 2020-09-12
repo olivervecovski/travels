@@ -53,6 +53,11 @@ export default {
     });
    
   },
+  computed: {
+    name() {
+      return this.data 
+    }
+  },
 }
 </script>
 

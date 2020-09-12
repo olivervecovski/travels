@@ -59,5 +59,13 @@ export default {
 
   editGeneralSettings(form) {
     return Api().post('/users/general', form);
+  },
+  
+  editProfileImage(form) {
+    return Api().post('/users/image', form);
+  },
+
+  editPassword(form) {
+    return Api().post('users/password', form);
   }
 }
