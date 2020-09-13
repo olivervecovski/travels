@@ -15945,17 +15945,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -15996,7 +15985,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
 //
 //
 //
@@ -16064,19 +16052,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -16164,6 +16139,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -16209,15 +16191,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -16228,7 +16201,8 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       user: {},
-      trips: {}
+      trips: {},
+      isEditing: false
     };
   },
   beforeCreate: function beforeCreate() {
@@ -55867,66 +55841,48 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "col-md-12 mb-2" }, [
-    _c("div", { staticClass: "card" }, [
-      _c("div", { staticClass: "card-body" }, [
-        _c("h3", [_vm._v("General")]),
-        _vm._v(" "),
-        _c("div", { staticClass: "form-group" }, [
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.form.name,
-                expression: "form.name"
-              }
-            ],
-            staticClass: "form-control",
-            attrs: { type: "text", id: "name" },
-            domProps: { value: _vm.form.name },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.$set(_vm.form, "name", $event.target.value)
-              }
-            }
-          })
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "form-group" }, [
-          _c("textarea", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.form.description,
-                expression: "form.description"
-              }
-            ],
-            staticClass: "form-control",
-            attrs: { placeholder: "Description", rows: "3" },
-            domProps: { value: _vm.form.description },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.$set(_vm.form, "description", $event.target.value)
-              }
-            }
-          })
-        ]),
-        _vm._v(" "),
-        _c(
-          "button",
-          { staticClass: "btn btn-outline-success", on: { click: _vm.edit } },
-          [_vm._v("Save")]
-        )
-      ])
-    ])
+  return _c("div", [
+    _c("input", {
+      directives: [
+        {
+          name: "model",
+          rawName: "v-model",
+          value: _vm.form.name,
+          expression: "form.name"
+        }
+      ],
+      attrs: { placeholder: "Name", type: "text", id: "name" },
+      domProps: { value: _vm.form.name },
+      on: {
+        input: function($event) {
+          if ($event.target.composing) {
+            return
+          }
+          _vm.$set(_vm.form, "name", $event.target.value)
+        }
+      }
+    }),
+    _vm._v(" "),
+    _c("textarea", {
+      directives: [
+        {
+          name: "model",
+          rawName: "v-model",
+          value: _vm.form.description,
+          expression: "form.description"
+        }
+      ],
+      attrs: { placeholder: "Description", rows: "3" },
+      domProps: { value: _vm.form.description },
+      on: {
+        input: function($event) {
+          if ($event.target.composing) {
+            return
+          }
+          _vm.$set(_vm.form, "description", $event.target.value)
+        }
+      }
+    })
   ])
 }
 var staticRenderFns = []
@@ -55951,57 +55907,82 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "col-md-12" }, [
-    _c("div", { staticClass: "card" }, [
-      _c("div", { staticClass: "card-body" }, [
-        _c("h3", [_vm._v("Image")]),
-        _vm._v(" "),
-        _c("div", { staticClass: "input-group mb-3" }, [
-          _c("div", { staticClass: "custom-file" }, [
-            _c("input", {
-              staticClass: "custom-file-input",
-              attrs: { type: "file", id: "profile-image" },
-              on: { change: _vm.previewImage }
-            }),
-            _vm._v(" "),
-            _c(
-              "label",
-              {
-                staticClass: "custom-file-label",
-                attrs: { for: "profile-image" }
-              },
-              [_vm._v("Change profile picture")]
-            )
-          ])
-        ]),
-        _vm._v(" "),
-        _c(
-          "div",
-          {
-            directives: [
-              {
-                name: "show",
-                rawName: "v-show",
-                value: _vm.imageData && _vm.imageData.length > 0,
-                expression: "imageData && imageData.length > 0"
+  return _c("div", { staticClass: "profile-edit-image" }, [
+    _c("div", [
+      _c(
+        "div",
+        {
+          directives: [
+            {
+              name: "show",
+              rawName: "v-show",
+              value: _vm.imageData && _vm.imageData.length > 0,
+              expression: "imageData && imageData.length > 0"
+            }
+          ],
+          staticClass: "img-box"
+        },
+        [
+          _c(
+            "div",
+            {
+              staticClass: "profile-cover",
+              on: {
+                click: function($event) {
+                  return _vm.$refs.fileUpload.click()
+                }
               }
-            ],
-            staticClass: "image-preview"
-          },
-          [
-            _c("img", {
-              staticClass: "avatar-full",
-              attrs: { src: _vm.imageData }
-            })
-          ]
-        ),
-        _vm._v(" "),
-        _c(
-          "button",
-          { staticClass: "btn btn-outline-success", on: { click: _vm.edit } },
-          [_vm._v("Save")]
-        )
-      ])
+            },
+            [_c("fa", { attrs: { icon: "images" } })],
+            1
+          ),
+          _vm._v(" "),
+          _c("img", {
+            staticClass: "avatar-full",
+            attrs: { src: _vm.imageData }
+          })
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          directives: [
+            {
+              name: "show",
+              rawName: "v-show",
+              value: !_vm.imageData,
+              expression: "!imageData"
+            }
+          ],
+          staticClass: "custom-file"
+        },
+        [
+          _c("input", {
+            ref: "fileUpload",
+            staticClass: "custom-file-input",
+            attrs: { type: "file", id: "profile-image" },
+            on: { change: _vm.previewImage }
+          }),
+          _vm._v(" "),
+          _c(
+            "label",
+            {
+              staticClass: "custom-file-label",
+              attrs: { for: "profile-image" }
+            },
+            [
+              _vm._v(
+                "\n        " +
+                  _vm._s(
+                    _vm.imageData ? "Change picture" : "Chose profile picture"
+                  ) +
+                  "\n      "
+              )
+            ]
+          )
+        ]
+      )
     ])
   ])
 }
@@ -56027,102 +56008,89 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "col-md-12" }, [
-    _c("div", { staticClass: "card" }, [
-      _c("div", { staticClass: "card-body" }, [
-        _c("h3", [_vm._v("Password")]),
-        _vm._v(" "),
-        _c("div", { staticClass: "form-group" }, [
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.form.password,
-                expression: "form.password"
-              }
-            ],
-            staticClass: "form-control",
-            attrs: { type: "password", placeholder: "New password" },
-            domProps: { value: _vm.form.password },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.$set(_vm.form, "password", $event.target.value)
-              }
-            }
-          }),
-          _vm._v(" "),
-          _vm.errors.password
-            ? _c("span", { staticClass: "text-danger" }, [
-                _vm._v(_vm._s(_vm.errors.password[0]))
-              ])
-            : _vm._e()
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "form-group" }, [
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.form.password_confirmation,
-                expression: "form.password_confirmation"
-              }
-            ],
-            staticClass: "form-control",
-            attrs: { type: "password", placeholder: "Confirm new password" },
-            domProps: { value: _vm.form.password_confirmation },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.$set(_vm.form, "password_confirmation", $event.target.value)
-              }
-            }
-          })
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "form-group" }, [
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.form.current_password,
-                expression: "form.current_password"
-              }
-            ],
-            staticClass: "form-control",
-            attrs: { type: "password", placeholder: "Current password" },
-            domProps: { value: _vm.form.current_password },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.$set(_vm.form, "current_password", $event.target.value)
-              }
-            }
-          }),
-          _vm._v(" "),
-          _vm.errors.current_password
-            ? _c("span", { staticClass: "text-danger" }, [
-                _vm._v(_vm._s(_vm.errors.current_password[0]))
-              ])
-            : _vm._e()
-        ]),
-        _vm._v(" "),
-        _c(
-          "button",
-          { staticClass: "btn btn-outline-success", on: { click: _vm.edit } },
-          [_vm._v("Save")]
-        )
-      ])
-    ])
+  return _c("div", [
+    _c("input", {
+      directives: [
+        {
+          name: "model",
+          rawName: "v-model",
+          value: _vm.form.current_password,
+          expression: "form.current_password"
+        }
+      ],
+      class: { "input-danger": _vm.errors.current_password },
+      attrs: { type: "password", placeholder: "Current password" },
+      domProps: { value: _vm.form.current_password },
+      on: {
+        input: function($event) {
+          if ($event.target.composing) {
+            return
+          }
+          _vm.$set(_vm.form, "current_password", $event.target.value)
+        }
+      }
+    }),
+    _vm._v(" "),
+    _vm.errors.current_password
+      ? _c("span", { staticClass: "text-danger" }, [
+          _vm._v(_vm._s(_vm.errors.current_password[0]))
+        ])
+      : _vm._e(),
+    _vm._v(" "),
+    _c("input", {
+      directives: [
+        {
+          name: "model",
+          rawName: "v-model",
+          value: _vm.form.password,
+          expression: "form.password"
+        }
+      ],
+      class: { "input-danger": _vm.errors.password },
+      attrs: { type: "password", placeholder: "New password" },
+      domProps: { value: _vm.form.password },
+      on: {
+        input: function($event) {
+          if ($event.target.composing) {
+            return
+          }
+          _vm.$set(_vm.form, "password", $event.target.value)
+        }
+      }
+    }),
+    _vm._v(" "),
+    _vm.errors.password
+      ? _c("span", { staticClass: "text-danger" }, [
+          _vm._v(_vm._s(_vm.errors.password[0]))
+        ])
+      : _vm._e(),
+    _vm._v(" "),
+    _c("input", {
+      directives: [
+        {
+          name: "model",
+          rawName: "v-model",
+          value: _vm.form.password_confirmation,
+          expression: "form.password_confirmation"
+        }
+      ],
+      attrs: { type: "password", placeholder: "Confirm new password" },
+      domProps: { value: _vm.form.password_confirmation },
+      on: {
+        input: function($event) {
+          if ($event.target.composing) {
+            return
+          }
+          _vm.$set(_vm.form, "password_confirmation", $event.target.value)
+        }
+      }
+    }),
+    _vm._v(" "),
+    _c(
+      "button",
+      { staticClass: "btn btn-outline-success", on: { click: _vm.edit } },
+      [_vm._v("Save")]
+    )
   ])
 }
 var staticRenderFns = []
@@ -56147,17 +56115,15 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    [
-      _c("editgeneral"),
+  return _c("div", [
+    _c("h3", [_vm._v("Edit profile")]),
+    _vm._v(" "),
+    _c("div", { staticClass: "profile-edit" }, [
+      _c("span", [_c("editgeneral"), _vm._v(" "), _c("editpassword")], 1),
       _vm._v(" "),
-      _c("editimage"),
-      _vm._v(" "),
-      _c("editpassword")
-    ],
-    1
-  )
+      _c("span", [_c("editimage")], 1)
+    ])
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -56181,60 +56147,46 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "row" }, [
-    _c("div", { staticClass: "col-md-3" }, [
-      _c("div", { staticClass: "center" }, [
+  return _c("div", { staticClass: "profile-page" }, [
+    _c("div", { staticClass: "profile-left-pane" }, [
+      _c("div", { staticClass: "profile-image" }, [
         _c("img", {
-          staticClass: "avatar-full rounded-circle",
+          staticClass: "avatar-full",
           attrs: { src: _vm.user.avatar, alt: "" }
         })
       ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "center" }, [
-        _c("div", { staticClass: "text-center my-2" }, [
-          _vm._v(_vm._s(_vm.user.name))
-        ])
-      ]),
-      _vm._v(" "),
-      _vm.user.id == _vm.$store.getters.user.id && !_vm.$store.getters.isEditing
+      _vm._v("\n    " + _vm._s(_vm.user.name) + "\n    "),
+      _vm.user.id == _vm.$store.getters.user.id
         ? _c(
             "button",
             {
-              staticClass: "btn btn-block btn-default",
               on: {
                 click: function($event) {
-                  return _vm.$store.dispatch("profile_editing")
+                  _vm.isEditing = !_vm.isEditing
                 }
               }
             },
-            [_vm._v("\n      Edit profile\n    ")]
-          )
-        : _vm._e(),
-      _vm._v(" "),
-      _vm.$store.getters.isEditing
-        ? _c(
-            "button",
-            {
-              staticClass: "btn btn-block btn-default",
-              on: {
-                click: function($event) {
-                  return _vm.$store.dispatch("profile_editing")
-                }
-              }
-            },
-            [_vm._v("\n      View profile")]
+            [
+              _vm._v(
+                "\n      " +
+                  _vm._s(!_vm.isEditing ? "Edit profile" : "View profile") +
+                  "\n    "
+              )
+            ]
           )
         : _vm._e()
     ]),
     _vm._v(" "),
-    !_vm.$store.getters.isEditing
-      ? _c(
-          "div",
-          { staticClass: "col-md-9 col-lg-6" },
-          [_c("triplist", { attrs: { trips: _vm.user.trips } })],
-          1
-        )
-      : _c("div", { staticClass: "col-md-9 col-lg-6" }, [_c("editProfile")], 1)
+    _c(
+      "div",
+      { staticClass: "profile-right-pane" },
+      [
+        _vm.isEditing
+          ? _c("triplist", { attrs: { trips: _vm.user.trips } })
+          : _c("editProfile")
+      ],
+      1
+    )
   ])
 }
 var staticRenderFns = []
