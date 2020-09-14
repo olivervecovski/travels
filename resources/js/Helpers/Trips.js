@@ -8,6 +8,7 @@ export default {
   },
 
   create(form) {
+    console.log(form)
     return Api().post('/trips', form);
   },
 

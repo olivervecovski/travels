@@ -1,13 +1,14 @@
 import Main from './components/Main.vue';
 import Login from './components/Login/Login.vue';
 import Register from './components/Login/Register.vue';
-import TripList from './components/Trips/TripList';
 import Home from './components/Home';
 import LoginProvider from './components/Login/LoginProvider.vue';
 import ForgotPassword from './components/Login/ForgotPassword.vue';
 import ResetPassword from './components/Login/ResetPassword.vue';
 import VerifyEmail from './components/Login/VerifyEmail.vue';
 import ViewProfile from './components/User/View_profile.vue';
+
+import NewTrip from './components/Trips/New_trip';
 import store from './store/index';
 
 function redirectIfLoggedIn(to, from, next) {
@@ -69,6 +70,11 @@ export const routes = [
     {
         path: '/profile/:id',
         component: ViewProfile,
+        beforeEnter: redirectIfNotLoggedIn
+    },
+    {
+        path: '/new-trip',
+        component: NewTrip,
         beforeEnter: redirectIfNotLoggedIn
     }
     
