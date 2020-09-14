@@ -19,6 +19,18 @@ const tripsstore = {
         commit('set_trips', response.data)
       })
     },
+
+    async create_trip({commit},form) {
+      return await Trips.create(form)
+      .then(response => {
+        console.log(response.data);
+        return {'message': 'Trip saved', 'success': true};
+      })
+      .catch(err => {
+        console.log(err.response.data)
+        return {'message': err.response.data.message, 'success': false};
+      })
+    }
   },
   modules: {},
   getters: {
