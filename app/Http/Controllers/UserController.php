@@ -34,56 +34,40 @@ class UserController extends Controller
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update_general(Request $request)
+    public function update_profile(Request $request)
     {
         $request->validate([
             'name' => 'required',
-            'description' => 'required'
+            'password' => 'confirmed|min:8',
+            'image' => 'sometimes|nullable|file|image|',
+            'current_password' => 'required_if:password'
         ]);
 
         $user = Auth::user();
-        
-        $user->name = $request->name;
-        $user->user_profile->description = $request->description;
 
-        $user->save();
-        $user->user_profile->save();
+        if($request->password) {
+            if(!Hash::check($request->current_password, $user->password)) {
+                return response()->json([
+                    'message' => 'Incorrect password'
+                ], 403);
+            }
 
-        return response()->json([
-            'user' => new UserProfileResource($user)
-        ], 200);
-    }
-
-    public function update_password(Request $request) {
-        $request->validate([
-            'password' => 'required|confirmed',
-            'current_password' => 'required'
-        ]);
-
-        $user = Auth::user();
-        if(!Hash::check($request->current_password, $user->password)) {
-            return response()->json([
-                'message' => 'Incorrect password'
-            ], 403);
+            $user->password = $request->password;
         }
-        $user->password = $request->password;
+
+        if($request->image) {
+            $path = $request->image->store('avatars', 's3');
+            $user->user_profile->image_filename = basename($path);
+            $user->user_profile->image = Storage::disk('s3')->url($path);
+        }
+
+        if($request->description) {
+            $user->user_profile->description = $request->description; 
+        }
+
+        $user->name = $request->name;
+
         $user->save();
-
-        return response()->json([
-            'message' => 'Password changed'
-        ], 200);
-    }
-
-    public function update_image(Request $request) {
-        $request->validate([
-            'image' => 'required|file|image|'
-        ]);
-        
-        $path = $request->image->store('avatars', 's3');
-
-        $user = Auth::user();
-        $user->user_profile->image_filename = basename($path);
-        $user->user_profile->image = Storage::disk('s3')->url($path);
         $user->user_profile->save();
 
         return response()->json([

@@ -7,6 +7,7 @@ use App\Http\Resources\TripResource;
 use App\Models\Trip;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Throwable;
 
@@ -42,7 +43,21 @@ class TripController extends Controller
      */
     public function store(TripRequest $request)
     {
-        $trip = Auth::user()->trips()->create($request->all());
+        $trip = new Trip();
+
+        if(!$request->private) $trip->private = false;
+        else $trip->private = true;
+
+        if($request->image) {
+            $path = $request->image->store('trip_cover_images', 's3');
+            $trip->image_filename = basename($path);
+            $trip->image_url = Storage::disk('s3')->url($path);
+        }
+
+        $trip->name = $request->name;
+        $trip->description = $request->description;
+        $trip->start_date = $request->start_date;
+        $trip->save();
         return $this->tripResponse($trip, "New trip successfully created", 201);
     }
 

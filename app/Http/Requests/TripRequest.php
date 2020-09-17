@@ -25,7 +25,9 @@ class TripRequest extends FormRequest
     {
         return [
             'name' => 'required',
-            'start_date' => 'required|date'
+            'start_date' => 'required|date|date_format:Y-m-d',
+            'end_date' => 'date|date_format:Y-m-d|date_format:Y-m-d',
+            'image' => 'sometimes|nullable|file|image'
         ];
     }
 }
