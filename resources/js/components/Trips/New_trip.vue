@@ -2,6 +2,7 @@
   <div>
     <trip-form />
     <!-- COVER IMAGE FÖR TRIP-->
+    🔥
     <country-form />
   </div>
 </template>
