@@ -38,9 +38,9 @@ class UserController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'password' => 'confirmed|min:8',
-            'image' => 'sometimes|nullable|file|image|',
-            'current_password' => 'required_if:password'
+            'password' => 'confirmed|min:8|sometimes|nullable',
+            'image' => 'sometimes|nullable|image|',
+            'current_password' => 'required_if:password,=,null'
         ]);
 
         $user = Auth::user();
@@ -62,7 +62,7 @@ class UserController extends Controller
         }
 
         if($request->description) {
-            $user->user_profile->description = $request->description; 
+            $user->user_profile->description = $request->description;
         }
 
         $user->name = $request->name;
