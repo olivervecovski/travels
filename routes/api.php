@@ -26,9 +26,7 @@ Route::group([
     'prefix' => 'users'
 ], function($router) {
     Route::get('{id}', 'UserController@show');
-    Route::post('general', 'UserController@update_general');
-    Route::post('password', 'UserController@update_password');
-    Route::post('image', 'UserController@update_image');
+    Route::put('profile', 'UserController@update_profile');
 });
 
 Route::apiResource('/trips', 'TripController');
