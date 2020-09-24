@@ -3,7 +3,6 @@
 /public/storage
 /public/css/*
 /public/js/*
-public/.htaccess
 /storage/*.key
 /vendor
 .env
@@ -13,6 +12,6 @@ Homestead.json
 Homestead.yaml
 npm-debug.log
 yarn-error.log
-public/.htaccess
 .rnd
 .vscode/settings.json
+public/.htaccess
